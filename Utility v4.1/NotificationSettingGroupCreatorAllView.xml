@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataView  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="NotificationSettingGroupCreatorAllView" SegmentType="Admin" TitleResourceKey="NotificationSettingGroupCreatorAllView_Utility" GroupTitleResourceKey="UtilityGroup" Priority="42" PackageIdent="Utility" IsCheckBox="true" DefaultFilterIdent="NotificationSettingGroupCreatorFilter" ShareFilterIdent="NotificationSettingGroupCreatorFilter">
+  <AccessPermissions>
+    <string>SuperAdmin</string>
+  </AccessPermissions>
+  <Buttons>
+    <Button xsi:type="LinkButton" Ident="AddButton" FormIdent="NotificationSettingGroupCreator" TitleResourceKey="AddButton_Utility" />
+    <Button xsi:type="LinkButton" Ident="RecountPermissions_Utility" TitleResourceKey="RecountPermissions" Url="~/Clear/RecountPermissions" />
+    <Button xsi:type="LinkButton" Ident="Clear_Utility" TitleResourceKey="Clear" Url="~/Clear" />
+  </Buttons>
+  <DataSource>
+		<Columns>
+      <Column Ident="Row" IsPrimaryKey="true" IsVisible="false" />
+			<Column Ident="ID" TitleResourceKey="ID_Utility" Width="23" />
+      <Column Ident="ResourceKey" TitleResourceKey="ResourceKey_Utility" Width="23" />
+      <Column Ident="SenderType" TitleResourceKey="SenderType_Utility" Width="23" />
+      <Column Ident="FolderGroupSegmentIdent" TitleResourceKey="FolderGroupSegmentIdent_Utility" Width="23" />
+      <Column Ident="Copy" TitleResourceKey="CopyToImport_Utility" Width="8" />
+		</Columns>
+		<SQL>
+
+      SELECT *
+        FROM (
+          SELECT 
+            ROW_NUMBER() OVER(ORDER BY nsg.ID ASC) AS Row
+            ,CONCAT('<a href="../../Form/Index/NotificationSettingGroupCreator?OldID=', nsg.ID, '">', nsg.ID, '</a>') AS ID
+            ,nsg.ResourceKey
+            ,nsg.SenderType
+            ,nsg.FolderGroupSegmentIdent
+            ,CONCAT(
+              '<button type="button" class="btn btn-outline bg-pink-400 text-pink-800 btn-icon rounded-round ml-2" onclick="const elem=document.createElement(''textarea'');elem.value='''
+                ,nsg.ID
+                ,';'
+                ,nsg.ResourceKey
+                ,';'
+                ,nsg.SenderType
+                ,';'
+                ,nsg.FolderGroupSegmentIdent
+              ,''' + String.fromCharCode(13),document.body.appendChild(elem),elem.select(),document.execCommand(''copy''),document.body.removeChild(elem);"><i class="icon-copy3"></i></button>'
+            ) AS Copy
+          FROM dbo.NotificationSettingGroup AS nsg
+        ) AS tbl
+      WHERE 1 = 1 #FILTER#
+      
+    </SQL>
+		<Parameters>
+			<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeleteState" DataType="Number" Value="0" />
+		</Parameters>
+	</DataSource>
+
+  <Sections>
+    <Section xsi:type="ExportSection" Ident="BasicExportSection"  TitleResourceKey="BasicExport_Utility" >
+      <DataSource>
+        <Columns>
+          <Column Ident="Row" IsPrimaryKey="true" IsVisible="false" />
+          <Column Ident="ID" TitleResourceKey="ID_Utility"/>
+          <Column Ident="ResourceKey" TitleResourceKey="ResourceKey_Utility"/>
+          <Column Ident="SenderType" TitleResourceKey="SenderType_Utility"/>
+          <Column Ident="FolderGroupSegmentIdent" TitleResourceKey="FolderGroupSegmentIdent_Utility"/>
+        </Columns>
+        <SQL>
+          SELECT *
+          FROM (
+            SELECT 
+              ROW_NUMBER() OVER(ORDER BY nsg.ID ASC) AS Row
+              ,nsg.ID
+              ,nsg.ResourceKey
+              ,nsg.SenderType
+              ,nsg.FolderGroupSegmentIdent
+            FROM dbo.NotificationSettingGroup AS nsg
+          ) AS tbl
+          WHERE 1 = 1 #FILTER#
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeleteState" DataType="Number" Value="0" />
+        </Parameters>
+      </DataSource>
+    </Section>
+  </Sections>
+
+</DataView>

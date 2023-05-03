@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataView  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="HistoryTypeCreatorAllView" SegmentType="Admin" TitleResourceKey="HistoryTypeCreatorAllView_Utility" GroupTitleResourceKey="UtilityGroup" Priority="40" PackageIdent="Utility" IsCheckBox="true" DefaultFilterIdent="HistoryTypeCreatorFilter" ShareFilterIdent="HistoryTypeCreatorFilter">
+  <AccessPermissions>
+    <string>SuperAdmin</string>
+  </AccessPermissions>
+  <Buttons>
+    <Button xsi:type="LinkButton" Ident="AddButton" FormIdent="HistoryTypeCreator" TitleResourceKey="AddButton_Utility" />
+    <Button xsi:type="LinkButton" Ident="RecountPermissions" TitleResourceKey="RecountPermissions_Utility" Url="~/Clear/RecountPermissions"></Button>
+    <Button xsi:type="LinkButton" Ident="Clear" TitleResourceKey="Clear_Utility" Url="~/Clear"></Button>
+  </Buttons>
+  <DataSource>
+		<Columns>
+      <Column Ident="Row" IsPrimaryKey="true" IsVisible="false" />
+			<Column Ident="ID" TitleResourceKey="ID_Utility" Width="23" />
+      <Column Ident="ResourceKey" TitleResourceKey="ResourceKey_Utility" Width="23" />
+      <Column Ident="IconCssClass" TitleResourceKey="IconCssClass_Utility" Width="23" />
+      <Column Ident="ColorCssClass" TitleResourceKey="ColorCssClass_Utility" Width="23" />
+      <Column Ident="Copy" TitleResourceKey="CopyToImport_Utility" Width="8" />
+
+		</Columns>
+		<SQL>
+
+      SELECT *
+      FROM (
+        SELECT 
+          ROW_NUMBER() OVER(ORDER BY hit.ID ASC) AS Row
+          ,CONCAT('<a href="../../Form/Index/HistoryTypeCreator?OldID=', hit.ID, '">', hit.ID, '</a>') AS ID
+          ,hit.ResourceKey
+          ,CONCAT('<i class="', hit.IconCssClass, '"> - ', hit.IconCssClass, '</i>') AS IconCssClass
+          ,CONCAT('<span class="text-', hit.ColorCssClass, '">', hit.ColorCssClass, '</span>') AS ColorCssClass
+          ,CONCAT(
+            '<button type="button" class="btn btn-outline bg-pink-400 text-pink-800 btn-icon rounded-round ml-2" onclick="const elem=document.createElement(''textarea'');elem.value='''
+              ,hit.ID
+              ,','
+              ,hit.ResourceKey
+              ,','
+              ,hit.IconCssClass
+              ,','
+              ,hit.ColorCssClass
+            ,''' + String.fromCharCode(13),document.body.appendChild(elem),elem.select(),document.execCommand(''copy''),document.body.removeChild(elem);"><i class="icon-copy3"></i></button>'
+          ) AS Copy
+          FROM dbo.HistoryType AS hit
+        ) AS tbl
+      WHERE 1 = 1 #FILTER#
+      
+    </SQL>
+		<Parameters>
+			<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeleteState" DataType="Number" Value="0" />
+		</Parameters>
+	</DataSource>
+
+  <Sections>
+    <Section xsi:type="ExportSection" Ident="BasicExportSection"  TitleResourceKey="BasicExport_Utility" >
+      <DataSource>
+        <Columns>
+          <Column Ident="Row" IsPrimaryKey="true" IsVisible="false" />
+          <Column Ident="ID" TitleResourceKey="ID_Utility"/>
+          <Column Ident="ResourceKey" TitleResourceKey="ResourceKey_Utility"/>
+          <Column Ident="IconCssClass" TitleResourceKey="IconCssClass_Utility"/>
+          <Column Ident="ColorCssClass" TitleResourceKey="ColorCssClass_Utility"/>
+        </Columns>
+        <SQL>
+          SELECT *
+          FROM (
+            SELECT 
+              ROW_NUMBER() OVER(ORDER BY hit.ID ASC) AS Row
+              ,hit.ID
+              ,hit.ResourceKey
+              ,hit.IconCssClass
+              ,hit.ColorCssClass
+            FROM dbo.HistoryType AS hit
+          ) AS tbl
+          WHERE 1 = 1 #FILTER#
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeleteState" DataType="Number" Value="0" />
+        </Parameters>
+      </DataSource>
+    </Section>
+  </Sections>
+
+</DataView>

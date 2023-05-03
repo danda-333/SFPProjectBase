@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="PermissionSetting" SegmentType="Admin" PackageIdent="Utility">
+	<DataPermissions>
+		<string>SuperAdmin</string>
+	</DataPermissions>
+	<CreatePermissions>
+		<string>SuperAdmin</string>
+	</CreatePermissions>
+	<Buttons>
+		
+		<Button xsi:type="FormButton" Ident="CreateButton" TitleResourceKey="CreateButton_Utility" IsSave="true" PlacementType="Top" ColorType="Success" IconCssClass="icon-floppy-disk" IsVisible="false" />
+		<Button xsi:type="FormButton" Ident="DeleteAndCreateButton" TitleResourceKey="DeleteAndCreateButton_Utility" IsSave="true" PlacementType="Top" ColorType="Warning" IconCssClass="icon-floppy-disk" IsVisible="false" />
+		<Button xsi:type="FormButton" Ident="DeleteButton" TitleResourceKey="DeleteButton_Utility" IsSave="false" ColorType="Danger" IsVisible="false" IconCssClass="icon-bin2">
+			<Extensions>
+				<Extension xsi:type="ConfirmDialogExtension" TitleResourceKey="DeleteDialogTitle_Utility" DescriptionResourceKey="DeleteDialogDescription_Utility" />
+			</Extensions>
+		</Button>
+		<Button xsi:type="BackButton" Ident="BackButton" TitleResourceKey="BackButton_Utility" IconCssClass="icon-undo2" />
+
+	</Buttons>
+	<Controls>
+		<Control xsi:type="AutoCompleteControl" Ident="OldID" MaxLength="256" DataType="String" TitleResourceKey="ID_Utility" IsAnyValue="true">
+      <DataBind DefaultTitleResourceKey="SelectValue" DefaultValue="">
+        <Columns>
+          <Column Ident="ID" DataBindType="Value" />
+          <Column Ident="TextValue" DataBindType="Title"/>
+        </Columns>
+        <SQL>
+          SELECT ID, ID AS TextValue
+					FROM dbo.Permission 
+					WHERE ID like @OldID
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" LikeType="Both" MaxLenght="200" />
+        </Parameters>
+      </DataBind>
+      <SelectedDataBind>
+        <Columns>
+          <Column Ident="ID" DataBindType="Value" />
+          <Column Ident="TextValue" DataBindType="Title"/>
+        </Columns>
+        <SQL>
+          SELECT ID, ID AS TextValue
+					FROM dbo.Permission 
+					WHERE ID = @OldID
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" />
+        </Parameters>
+      </SelectedDataBind>
+    </Control>
+
+		<Control xsi:type="TextBoxControl" Ident="ASPNETRoleID" MaxLength="256" DataType="String" TitleResourceKey="ASPNETRoleID_Utility" IsFakeReadOnly="true" IsCreateColumn="false">
+			<DataBind>
+				<Dependencies>
+					<string>OldID</string>
+				</Dependencies>
+        <Columns>
+          <Column Ident="ASPNETRoleID" DataBindType="Value" />
+        </Columns>
+        <SQL>
+					SELECT ASPNETRoleID 
+					FROM dbo.Role
+					WHERE PermissionID = @OldID
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" />
+        </Parameters>
+      </DataBind>
+		</Control>
+
+		<Control xsi:type="TextBoxControl" Ident="NewID" MaxLength="256" DataType="String" TitleResourceKey="NewID_Utility">
+			<DataBind>
+				<Dependencies>
+					<string>OldID</string>
+				</Dependencies>
+        <Columns>
+          <Column Ident="NewID" DataBindType="Value" />
+        </Columns>
+        <SQL>
+					SELECT @OldID AS NewID
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" />
+        </Parameters>
+      </DataBind>
+		</Control>
+
+		<Control xsi:type="TextBoxControl" Ident="Weight" DataType="Number" TitleResourceKey="Weight_Utility">
+			<DataBind>
+				<Dependencies>
+					<string>OldID</string>
+				</Dependencies>
+        <Columns>
+          <Column Ident="Weight" DataBindType="Value" />
+        </Columns>
+        <SQL>
+					SELECT Weight
+					FROM dbo.Permission
+					WHERE ID = @OldID
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" />
+        </Parameters>
+      </DataBind>
+		</Control>
+
+		<Control xsi:type="DropDownListControl" Ident="IsComputed" DataType="Number" TitleResourceKey="IsComputed_Utility">
+			<DataBind>
+				<Dependencies>
+					<string>OldID</string>
+				</Dependencies>
+        <Columns>
+          <Column Ident="IsComputed" DataBindType="Value" />
+          <Column Ident="TextValue" DataBindType="Title"/>
+					<Column Ident="Selected" DataBindType="Selected"/>
+        </Columns>
+        <SQL>
+					SELECT 0 AS IsComputed, 'False' AS TextValue, IIF(
+						(
+							SELECT IsComputed
+							FROM dbo.Permission
+							WHERE ID = @OldID
+						) = 0 
+						AND
+						(
+							EXISTS (
+								SELECT *
+								FROM dbo.Role
+								WHERE PermissionID = @OldID
+							)
+						)
+					, 1, 0) AS Selected
+
+					UNION
+
+					SELECT 1 AS IsComputed, 'True' AS TextValue, IIF(
+						(
+							SELECT IsComputed
+							FROM dbo.Permission
+							WHERE ID = @OldID
+						) = 1
+					, 1, 0) AS Selected
+
+					UNION 
+					
+					SELECT 2 AS IsComputed, 'WithoutRole' AS TextValue, IIF(
+						(
+							SELECT IsComputed
+							FROM dbo.Permission
+							WHERE ID = @OldID
+						) = 0 
+						AND
+						(
+							NOT EXISTS (
+								SELECT *
+								FROM dbo.Role
+								WHERE PermissionID = @OldID
+							)
+						)
+					, 1, 0) AS Selected
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" />
+        </Parameters>
+      </DataBind>
+		</Control>
+
+		
+		<Control xsi:type="DropDownListControl" Ident="ParentID" MaxLength="256" DataType="String" TitleResourceKey="ParentID_Utility">
+      <DataBind DefaultTitleResourceKey="SelectValue" DefaultValue="">
+				<Dependencies>
+					<string>OldID</string>
+				</Dependencies>
+        <Columns>
+          <Column Ident="PermissionID" DataBindType="Value" />
+          <Column Ident="TextValue" DataBindType="Title"/>
+					<Column Ident="Selected" DataBindType="Selected"/>
+        </Columns>
+        <SQL>
+          SELECT rol.PermissionID, rol.PermissionID AS TextValue
+					,IIF(
+						(
+							SELECT roleP.PermissionID 
+							FROM dbo.Role AS role
+							LEFT JOIN dbo.Role AS roleP ON roleP.ASPNETRoleID = role.ParentASPNETRoleID
+							WHERE role.PermissionID = @OldID
+						) = rol.PermissionID
+					,1,0) AS Selected
+					FROM dbo.Role AS rol
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" />
+        </Parameters>
+      </DataBind>
+    </Control>
+
+		<Control xsi:type="TextBoxControl" Ident="VisibleType" DataType="Number" TitleResourceKey="VisibleType_Utility">
+			<DataBind>
+				<Dependencies>
+					<string>OldID</string>
+				</Dependencies>
+        <Columns>
+          <Column Ident="VisibleType" DataBindType="Value" />
+        </Columns>
+        <SQL>
+					SELECT VisibleType
+					FROM dbo.Role
+					WHERE PermissionID = @OldID
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" />
+        </Parameters>
+      </DataBind>
+		</Control>
+
+		<Control xsi:type="DropDownListControl" Ident="DefaultValue" DataType="Bool" TitleResourceKey="DefaultValue_Utility">
+			<DataBind>
+				<Dependencies>
+					<string>OldID</string>
+				</Dependencies>
+        <Columns>
+          <Column Ident="DefaultValue" DataBindType="Value" />
+          <Column Ident="TextValue" DataBindType="Title"/>
+					<Column Ident="Selected" DataBindType="Selected"/>
+        </Columns>
+        <SQL>
+					SELECT 0 AS DefaultValue, 'False' AS TextValue, IIF(
+						(
+							SELECT DefaultValue
+							FROM dbo.Role
+							WHERE PermissionID = @OldID
+						) = 0
+					, 1, 0) AS Selected
+
+					UNION
+
+					SELECT 1 AS DefaultValue, 'True' AS TextValue, IIF(
+						(
+							SELECT DefaultValue
+							FROM dbo.Role
+							WHERE PermissionID = @OldID
+						) = 1
+					, 1, 0) AS Selected
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" />
+        </Parameters>
+      </DataBind>
+		</Control>
+
+  </Controls>
+	<Sections>
+		<Section xsi:type="ContentSection" Ident="BasicInformation" TitleResourceKey="BasicInformation_Utility">
+			<HTMLTemplate>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<ControlLabel ControlID="OldID"/>
+							<Control ID="OldID"/>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<ControlLabel ControlID="ASPNETRoleID"/>
+							<Control ID="ASPNETRoleID"/>
+						</div>
+					</div>
+				</div>
+
+				<legend class="font-size-sm font-weight-bold">dbo.Permission</legend>
+
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<ControlLabel ControlID="NewID"/>
+							<Control ID="NewID"/>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<ControlLabel ControlID="Weight"/>
+							<Control ID="Weight"/>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<ControlLabel ControlID="IsComputed"/>
+							<Control ID="IsComputed"/>
+						</div>
+					</div>
+				</div>
+
+				<legend class="font-size-sm font-weight-bold js-showHideRole">dbo.Role</legend>
+
+				<div class="row js-showHideRole">
+					<div class="col-md-3">
+						<div class="form-group">
+							<ControlLabel ControlID="ParentID"/>
+							<Control ID="ParentID"/>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<ControlLabel ControlID="VisibleType"/>
+							<Control ID="VisibleType"/>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<ControlLabel ControlID="DefaultValue"/>
+							<Control ID="DefaultValue"/>
+						</div>
+					</div>
+				</div>
+
+				
+			</HTMLTemplate>
+		</Section>
+	</Sections>
+</Form>

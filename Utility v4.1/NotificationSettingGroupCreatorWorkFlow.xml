@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WorkFlow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Ident="NotificationSettingGroupCreatorWorkFlow" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" FormIdent="NotificationSettingGroupCreator" PackageIdent="Utility">
+  <Definition>
+    <States>
+      <State Value="0" TitleResourceKey="Deleted_Utility" />
+      <State Value="1" TitleResourceKey="New_Utility" />
+    </States>
+  </Definition>
+
+  <Steps>
+    <Step State="1">
+      <Groups>
+        <Group>
+          <Permissions>
+            <string>SuperAdmin</string>
+          </Permissions>
+          <Buttons>
+            <Button Ident="CreateButton" IsVisible="true">
+              <Actions>
+                <Action xsi:type="Required" ActionStart="BeforeValidation">
+                  <Idents>
+                    <string>NewID</string>
+                    <string>ResourceKey</string>
+                    <string>SenderType</string>
+                    <string>FolderGroupSegmentIdent</string>
+                  </Idents>
+                </Action>    
+
+                <Action ActionStart="BeforeValidation" ErrorMessageResourceKey="DuplicationPrimaryKeyError_Utility" xsi:type="GlobalValidation">
+                  <Condition>
+                    <SQL>
+                      SELECT IIF(
+                        EXISTS(SELECT NULL FROM dbo.[NotificationSettingGroup] WHERE ID = @NewID)
+                      ,0,1)
+                    </SQL>
+                    <Parameters>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="NewID" DataType="String" MaxLength="256"/>
+                    </Parameters>
+                  </Condition>
+                  <ControlIdents>
+                    <string>NewID</string>
+                  </ControlIdents>
+                </Action>
+
+                <Action xsi:type="ActionTrigger" Ident="CreateNotificationSettingGroup" ActionStart="AfterSave">
+                  <DataSource>
+                    <SQL>
+                      INSERT INTO dbo.NotificationSettingGroup (ID, ResourceKey, SenderType, FolderGroupSegmentIdent)
+                      VALUES (@NewID, @ResourceKey, @SenderType, @FolderGroupSegmentIdent)
+                    </SQL>
+                    <Parameters>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="NewID" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ResourceKey" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="SenderType" DataType="Number"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="FolderGroupSegmentIdent" DataType="String" MaxLength="256"/>
+                    </Parameters>
+                  </DataSource>
+                </Action>
+
+              </Actions>
+            </Button>
+            <Button Ident="UpdateButton" IsVisible="true">
+              <Actions>
+                <Action xsi:type="Required" ActionStart="BeforeValidation">
+                  <Idents>
+                    <string>NewID</string>
+                    <string>ResourceKey</string>
+                    <string>SenderType</string>
+                    <string>FolderGroupSegmentIdent</string>
+                  </Idents>
+                </Action>    
+
+                <Action ActionStart="BeforeValidation" ErrorMessageResourceKey="DuplicationPrimaryKeyError_Utility" xsi:type="GlobalValidation">
+                  <Condition>
+                    <SQL>
+                      SELECT IIF(
+                        EXISTS(SELECT NULL FROM dbo.[NotificationSettingGroup] WHERE ID = @NewID)
+                        AND @OldID != @NewID
+                      ,0,1)
+                    </SQL>
+                    <Parameters>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="NewID" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" MaxLength="256"/>
+                    </Parameters>
+                  </Condition>
+                  <ControlIdents>
+                    <string>NewID</string>
+                  </ControlIdents>
+                </Action>
+
+                <Action xsi:type="ActionTrigger" Ident="UpdateNotificationSettingGroup" ActionStart="AfterSave">
+                  <DataSource>
+                    <SQL>
+                      UPDATE dbo.NotificationSettingGroup 
+                        SET 
+                          ID = @NewID
+                          ,ResourceKey = @ResourceKey
+                          ,SenderType = @SenderType
+                          ,FolderGroupSegmentIdent = @FolderGroupSegmentIdent
+                      WHERE ID = @OldID
+                    </SQL>
+                    <Parameters>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="NewID" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ResourceKey" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="SenderType" DataType="Number"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="FolderGroupSegmentIdent" DataType="String" MaxLength="256"/>
+                    </Parameters>
+                  </DataSource>
+                </Action>
+
+              </Actions>
+            </Button>
+            <Button Ident="DeleteButton" IsVisible="true">
+              <Actions>
+                <Action xsi:type="Required" ActionStart="BeforeValidation">
+                  <Idents>
+                    <string>OldID</string>
+                  </Idents>
+                </Action>
+
+                <Action xsi:type="ActionTrigger" Ident="DeletePermission" ActionStart="AfterSave">
+                  <DataSource>
+                    <SQL>
+                      DELETE FROM dbo.NotificationSettingGroup
+                      WHERE ID = @OldID
+                    </SQL>
+                    <Parameters>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" MaxLength="256"/>
+                    </Parameters>
+                  </DataSource>
+                </Action>
+
+              </Actions>
+            </Button>
+          </Buttons>
+        </Group>
+      </Groups>
+    </Step>
+  </Steps>
+</WorkFlow>

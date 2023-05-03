@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="UtilityImporter" SegmentType="Admin" PackageIdent="Utility">
+	<DataPermissions>
+		<string>SuperAdmin</string>
+	</DataPermissions>
+	<CreatePermissions>
+		<string>SuperAdmin</string>
+	</CreatePermissions>
+	<Buttons>
+		
+		<Button xsi:type="FormButton" Ident="ImportAsPermission" TitleResourceKey="ImportAsPermission_Utility" IsSave="true" PlacementType="Top" ColorType="Success" IconCssClass="icon-import" IsVisible="false" IsStopRedirect="true" />
+
+		<Button xsi:type="FormButton" Ident="ImportAsSegment" TitleResourceKey="ImportAsSegment_Utility" IsSave="true" PlacementType="Top" ColorType="Success" IconCssClass="icon-import" IsVisible="false" IsStopRedirect="true" />
+
+		<Button xsi:type="FormButton" Ident="ImportAsHistoryType" TitleResourceKey="ImportAsHistoryType_Utility" IsSave="true" PlacementType="Top" ColorType="Success" IconCssClass="icon-import" IsVisible="false" IsStopRedirect="true" />
+
+		<Button xsi:type="FormButton" Ident="ImportAsCommunication" TitleResourceKey="ImportAsCommunication_Utility" IsSave="true" PlacementType="Top" ColorType="Success" IconCssClass="icon-import" IsVisible="false" IsStopRedirect="true" />
+
+		<Button xsi:type="FormButton" Ident="ImportAsNotificationGroup" TitleResourceKey="ImportAsNotificationGroup_Utility" IsSave="true" PlacementType="Top" ColorType="Success" IconCssClass="icon-import" IsVisible="false" IsStopRedirect="true" />
+
+		<Button xsi:type="FormButton" Ident="ImportAsNotification" TitleResourceKey="ImportAsNotification_Utility" IsSave="true" PlacementType="Top" ColorType="Success" IconCssClass="icon-import" IsVisible="false" IsStopRedirect="true" />
+
+		<Button xsi:type="BackButton" Ident="BackButton" TitleResourceKey="BackButton_Utility" IconCssClass="icon-undo2" />
+
+	</Buttons>
+	<Controls>
+
+		<Control xsi:type="TextAreaControl" Ident="ImportString" DataType="String" Rows="30" TitleResourceKey="ImportString_Utility"/>
+		<Control xsi:type="TextAreaControl" Ident="Output" DataType="String" Rows="5" TitleResourceKey="Output_Utility" IsFakeReadOnly="true"/>
+
+  </Controls>
+	<Sections>
+		<Section xsi:type="ContentSection" Ident="BasicInformation" TitleResourceKey="BasicInformation_Utility">
+			<HTMLTemplate>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<ControlLabel ControlID="Output"/>
+							<Control ID="Output"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<ControlLabel ControlID="ImportString"/>
+							<Control ID="ImportString"/>
+						</div>
+					</div>
+				</div>
+
+			</HTMLTemplate>
+		</Section>
+	</Sections>
+</Form>

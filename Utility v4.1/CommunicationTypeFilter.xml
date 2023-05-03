@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="CommunicationTypeFilter" PackageIdent="Utility">
+
+  <SelectedRow>
+    <FilterConditions>
+      <DataSource>
+        <SQL>
+          tbl.Row IN (SELECT ID FROM @SelectedRow)
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="SelectedRow" ConstantType="SelectedRow" DataType="NumberList" />
+        </Parameters>
+      </DataSource>
+    </FilterConditions>
+  </SelectedRow>
+
+</Filter>

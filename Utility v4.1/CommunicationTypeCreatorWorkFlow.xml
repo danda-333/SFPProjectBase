@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WorkFlow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Ident="CommunicationTypeCreatorWorkFlow" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" FormIdent="CommunicationTypeCreator" PackageIdent="Utility">
+  <Definition>
+    <States>
+      <State Value="0" TitleResourceKey="Deleted_Utility" />
+      <State Value="1" TitleResourceKey="New_Utility" />
+    </States>
+  </Definition>
+
+  <Steps>
+    <Step State="1">
+      <Groups>
+        <Group>
+          <Permissions>
+            <string>SuperAdmin</string>
+          </Permissions>
+          <Buttons>
+            <Button Ident="CreateButton" IsVisible="true">
+              <Actions>
+                <Action xsi:type="Required" ActionStart="BeforeValidation">
+                  <Idents>
+                    <string>NewID</string>
+                    <string>ResourceKey</string>
+                    <string>ColorCssClass</string>
+                    <string>IsUsePermission</string>
+                  </Idents>
+                </Action>    
+
+                <Action ActionStart="BeforeValidation" ErrorMessageResourceKey="DuplicationPrimaryKeyError_Utility" xsi:type="GlobalValidation">
+                  <Condition>
+                    <SQL>
+                      SELECT IIF(
+                        EXISTS(SELECT NULL FROM dbo.[CommunicationType] WHERE ID = @NewID)
+                      ,0,1)
+                    </SQL>
+                    <Parameters>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="NewID" DataType="String" MaxLength="256"/>
+                    </Parameters>
+                  </Condition>
+                  <ControlIdents>
+                    <string>NewID</string>
+                  </ControlIdents>
+                </Action>
+
+                <Action xsi:type="ActionTrigger" Ident="CreateCommunicationType" ActionStart="AfterSave">
+                  <DataSource>
+                    <SQL>
+                      INSERT INTO dbo.CommunicationType (ID, ResrouceKey, ColorCssClass, IsUsePermission)
+                      VALUES (@NewID, @ResourceKey, @ColorCssClass, @IsUsePermission)
+                    </SQL>
+                    <Parameters>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="NewID" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ResourceKey" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="IsUsePermission" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ColorCssClass" DataType="String" MaxLength="256"/>
+                    </Parameters>
+                  </DataSource>
+                </Action>
+
+              </Actions>
+            </Button>
+            <Button Ident="UpdateButton" IsVisible="true">
+              <Actions>
+                <Action xsi:type="Required" ActionStart="BeforeValidation">
+                  <Idents>
+                    <string>NewID</string>
+                    <string>ResourceKey</string>
+                    <string>ColorCssClass</string>
+                    <string>IsUsePermission</string>
+                  </Idents>
+                </Action>    
+
+                <Action ActionStart="BeforeValidation" ErrorMessageResourceKey="DuplicationPrimaryKeyError_Utility" xsi:type="GlobalValidation">
+                  <Condition>
+                    <SQL>
+                      SELECT IIF(
+                        EXISTS(SELECT NULL FROM dbo.[CommunicationType] WHERE ID = @NewID)
+                        AND @OldID != @NewID
+                      ,0,1)
+                    </SQL>
+                    <Parameters>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="NewID" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" MaxLength="256"/>
+                    </Parameters>
+                  </Condition>
+                  <ControlIdents>
+                    <string>NewID</string>
+                  </ControlIdents>
+                </Action>
+
+                <Action xsi:type="ActionTrigger" Ident="UpdateCommunicationType" ActionStart="AfterSave">
+                  <DataSource>
+                    <SQL>
+                      UPDATE dbo.CommunicationType 
+                        SET 
+                          ID = @NewID
+                          ,ResrouceKey = @ResourceKey
+                          ,ColorCssClass = @ColorCssClass
+                          ,IsUsePermission = @IsUsePermission
+                      WHERE ID = @OldID
+                    </SQL>
+                    <Parameters>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="NewID" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ResourceKey" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="IsUsePermission" DataType="String" MaxLength="256"/>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ColorCssClass" DataType="String" MaxLength="256"/>
+                    </Parameters>
+                  </DataSource>
+                </Action>
+
+              </Actions>
+            </Button>
+            <Button Ident="DeleteButton" IsVisible="true">
+              <Actions>
+                <Action xsi:type="Required" ActionStart="BeforeValidation">
+                  <Idents>
+                    <string>OldID</string>
+                  </Idents>
+                </Action>
+
+                <Action xsi:type="ActionTrigger" Ident="DeletePermission" ActionStart="AfterSave">
+                  <DataSource>
+                    <SQL>
+                      DELETE FROM dbo.CommunicationType
+                      WHERE [ID] = @OldID
+                    </SQL>
+                    <Parameters>
+                      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="OldID" DataType="String" MaxLength="256"/>
+                    </Parameters>
+                  </DataSource>
+                </Action>
+
+              </Actions>
+            </Button>
+          </Buttons>
+        </Group>
+      </Groups>
+    </Step>
+  </Steps>
+</WorkFlow>

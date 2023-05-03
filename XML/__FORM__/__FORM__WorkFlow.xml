@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WorkFlow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Ident="__Form__WorkFlow" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" FormIdent="__Form__" PackageIdent="__ModuleName__">
+  <Definition>
+    <States>
+      <State Value="0" TitleResourceKey="Deleted___ModuleName__" ColorCssClass="danger"/> <!--Deleted-->
+      <State Value="1" TitleResourceKey="New___ModuleName__" ColorCssClass="warning"/> <!--New-->
+      <State Value="2" TitleResourceKey="Saved___ModuleName__" ColorCssClass="primary"/> <!--Saved-->  
+    </States>
+  </Definition>
+
+  <GlobalJavaScripts>
+    <!-- <JavaScript xsi:type="ShowHide" Ident="" ControlIdent="" >
+      <Selectors>
+        <string>.js-</string>
+      </Selectors>
+      <ShowValues>
+        <string></string>
+      </ShowValues>
+    </JavaScript> -->
+  </GlobalJavaScripts>
+
+  <ControlShareCodes>
+    <ControlShareCode Ident="EnableAllControlShare">
+      <Controls>
+        <FormControl Ident="Name" IsReadOnly="false" />
+      </Controls>
+    </ControlShareCode> <!-- <FormControl xsi:type="ShareCodeControl" Ident="EnableAllControlShare" /> -->
+  </ControlShareCodes> 
+
+  <ActionShareCodes>
+    <!-- <ActionShareCode Ident="BasicRequiredActionShare">
+      <Actions>
+        <Action xsi:type="Required" ActionStart="BeforeValidation">
+          <Idents>
+            <string></string>
+          </Idents>
+        </Action>
+
+        <Action xsi:type="IF" ActionStart="BeforeValidation">
+          <Condition>
+            <SQL>
+              SELECT IIF(
+                @PaymentTermsIdent = 'Other'
+              , 1, 0)
+            </SQL>
+            <Parameters>
+              <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="PaymentTermsIdent" DataType="String"  />
+            </Parameters>
+          </Condition>
+          <TrueActions><Action xsi:type="Required" ActionStart="BeforeValidation">
+            <Idents>
+              <string>PaymentTermsOther</string>
+            </Idents>
+          </Action>
+          </TrueActions>
+        </Action>
+      </Actions>
+
+      
+    </ActionShareCode> --> <!-- <Action xsi:type="ShareCode" Ident="BasicRequiredActionShare" /> -->
+
+    <!-- Email Actions -->
+    <!-- <ActionShareCode Ident="*EmailActionShare">
+      <Actions>
+
+        <Action xsi:type="Email" SubjectResourceKey="*_Email___ModuleName__" BodyResourceKey="*_Email___ModuleName__" EmailIdent="*_Email___ModuleName__" ActionStart="AfterPermission" Ident="*_Email___ModuleName__">
+          <Recipients>
+            <Recipient RecipientType="To" SourceType="Permission" Value="*"/>
+          </Recipients>
+        </Action>
+
+      </Actions>
+    </ActionShareCode> --> <!-- <Action xsi:type="ShareCode" Ident="SubmitEmailActionShare" /> -->
+
+  </ActionShareCodes> 
+
+  <ButtonShareCodes>
+
+    <ButtonShareCode Ident="SaveFirstStateButtonShare">
+      <Buttons>
+        <Button Ident="SaveButton" IsVisible="true">
+          <Actions>
+            <Action xsi:type="ChangeState" State="2" ActionStart="AfterSave" />
+          </Actions>
+        </Button>
+      </Buttons>
+    </ButtonShareCode> <!-- <Button xsi:type="ShareCodeButton" Ident="SaveFirstStateButtonShare" />  -->
+
+    <ButtonShareCode Ident="SaveButtonShare">
+      <Buttons>
+        <Button Ident="SaveButton" IsVisible="true">
+          <Actions>
+          </Actions>
+        </Button>
+      </Buttons>
+    </ButtonShareCode> <!-- <Button xsi:type="ShareCodeButton" Ident="SaveButtonShare" />  -->
+
+    <ButtonShareCode Ident="DeleteButtonShare">
+      <Buttons>
+        <Button Ident="DeleteButton" IsVisible="true">
+          <Actions>
+            <Action xsi:type="ChangeState" State="0" ActionStart="AfterSave" />
+          </Actions>
+        </Button>
+      </Buttons>
+    </ButtonShareCode> <!-- <Button xsi:type="ShareCodeButton" Ident="DeleteButtonShare" />  -->
+
+  </ButtonShareCodes> 
+
+  <GlobalActions>
+
+    <!-- <Action xsi:type="ActionTrigger" Ident="*" ActionStart="AfterSave">
+      <DataSource>
+        <SQL>
+
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ID" DataType="Number"  />
+        </Parameters>
+      </DataSource>
+    </Action> -->
+
+  </GlobalActions>
+
+  <Steps>
+    <Step State="1">
+      <Groups>
+        <Group>
+          <Permissions>
+            <string>__ModuleName__</string>
+          </Permissions>
+          <Buttons>
+            <Button xsi:type="ShareCodeButton" Ident="SaveFirstStateButtonShare" />
+          </Buttons>
+          <Sections>
+            <Section Ident="HeaderSection" IsVisible="false" />
+            <Section Ident="TimeLine" IsVisible="false" />
+          </Sections>
+          <Controls>
+            <FormControl xsi:type="ShareCodeControl" Ident="EnableAllControlShare" />
+          </Controls>
+        </Group>
+      </Groups>
+    </Step> <!--New-->
+    <Step State="2">
+      <Groups>
+        <Group>
+          <Permissions>
+            <string>Creator</string>
+          </Permissions>
+          <Buttons>
+            <Button xsi:type="ShareCodeButton" Ident="SaveButtonShare" />
+            <Button xsi:type="ShareCodeButton" Ident="DeleteButtonShare" />
+          </Buttons>
+          <Controls>
+            <FormControl xsi:type="ShareCodeControl" Ident="EnableAllControlShare" />
+          </Controls>
+        </Group>
+      </Groups>
+    </Step> <!--Saved-->
+    
+  </Steps>
+</WorkFlow>

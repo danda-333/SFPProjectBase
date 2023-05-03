@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataView  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__Form__AllView" SegmentType="__ModuleName__" TitleResourceKey="__Form__AllView___ModuleName__" XGroupTitleResourceKey="__Form__Group___ModuleName__" Priority="100" XIsManualPaging="true" XIsGeneratePaging="false" XDefaultFilterIdent="__Form__Filter" CountColorCssClass="primary" PackageIdent="__ModuleName__">
+  <AccessPermissions>
+    <string>__ModuleName__</string>
+  </AccessPermissions>
+  <Buttons>
+    <Button xsi:type="LinkButton" Ident="New__Form__Button" FormIdent="__Form__" TitleResourceKey="New__Form__Button___ModuleName__" />
+  </Buttons>
+  <DataSource FormIdent="__Form__">
+    <DataPermissions>
+      <string>__ModuleName__</string>
+    </DataPermissions>
+		<Columns>
+      <Column Ident="ID" TitleResourceKey="ID___ModuleName__" IsPrimaryKey="true" Width="10" TableAlterIdent="tbl" IsVisible="true" DataType="Number"/>
+      <Column Ident="Name" TitleResourceKey="Name___ModuleName__" Width="75" TableAlterIdent="tbl">
+        <SQL>
+          __FormAlias__.[Name]
+        </SQL>
+      </Column>
+      <Column xsi:type="WorkFlowStateColumn" Ident="State" FormIdent="__Form__" TitleResourceKey="State___ModuleName__" IsColor="true" Width="15" TableAlterIdent="tbl">
+        <SQL>
+          __FormAlias__.State
+        </SQL>
+      </Column>
+      <Column Ident="CreateDate" TitleResourceKey="CreateDate___ModuleName__" TableAlterIdent="tbl" IsOptional="true" DataType="DateTime">
+        <SQL>
+          __FormAlias__.CreateDate
+        </SQL>
+      </Column>
+      <Column Ident="AccountID" TitleResourceKey="AccountID___ModuleName__" TableAlterIdent="tbl" IsOptional="true">
+        <SQL>
+          accCreator.FullName AS AccountID
+        </SQL>
+      </Column>
+		</Columns>
+		<SQL>
+      SELECT 
+        __FormAlias__.ID
+        #ADDCOLUMN#
+      FROM usr.__Form__ AS __FormAlias__
+      INNER JOIN dbo.Account AS accCreator ON accCreator.ID = __FormAlias__.AccountID
+      WHERE
+        __FormAlias__.[State] != @DeletedState
+        AND #PERMISSION[__Form__(__FormAlias__)]# /*#FILTER#*/
+
+      /*SELECT *
+      FROM (
+        SELECT *, #ROWNUM#
+        FROM (
+          SELECT 
+            __FormAlias__.ID
+            #ADDCOLUMN#
+          FROM usr.__Form__ AS __FormAlias__
+          INNER JOIN dbo.Account AS acc ON acc.ID = __FormAlias__.AccountID
+          WHERE
+            __FormAlias__.[State] != @DeletedState
+            AND #PERMISSION[__Form__(__FormAlias__)]# #FILTER#
+        ) AS tbl
+      ) AS tbl
+      WHERE RowNum BETWEEN @StartPage AND @EndPage*/
+    </SQL>
+		<Parameters>
+			<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+		</Parameters>
+	</DataSource>
+
+  <CountDataSource>
+    <SQL>
+      SELECT COUNT(__FormAlias__.ID)
+      FROM usr.__Form__ AS __FormAlias__
+      WHERE
+        __FormAlias__.[State] != @DeletedState
+        AND #PERMISSION[__Form__(__FormAlias__)]# /*#FILTER#*/
+    </SQL>
+    <Parameters>
+			<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+    </Parameters>
+  </CountDataSource>
+
+  <Sections>
+    <Section xsi:type="ExportSection" Ident="BasicExport" TitleResourceKey="BasicExport___ModuleName__">
+      <DataSource>
+        <Columns>
+          <Column Ident="ID" TitleResourceKey="ID___ModuleName__" />
+          <Column Ident="Name" TitleResourceKey="Name___ModuleName__" />
+          <Column xsi:type="WorkFlowStateColumn" Ident="State" FormIdent="__Form__" TitleResourceKey="State___ModuleName__" IsColor="false" />
+          <Column Ident="CreateDate" TitleResourceKey="CreateDate___ModuleName__" />
+          <Column Ident="AccountID" TitleResourceKey="AccountID___ModuleName__" />
+        </Columns>
+        <SQL>
+
+          SELECT 
+            __FormAlias__.ID
+            #ADDCOLUMN#
+          FROM usr.__Form__ AS __FormAlias__
+          INNER JOIN dbo.Account AS acc ON acc.ID = __FormAlias__.AccountID
+          WHERE
+            __FormAlias__.[State] != @DeletedState
+            AND #PERMISSION[__Form__(__FormAlias__)]# /*#FILTER#*/
+
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+        </Parameters>
+      </DataSource>
+    </Section>
+  </Sections>
+
+</DataView>

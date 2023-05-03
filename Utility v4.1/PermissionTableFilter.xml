@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="PermissionTableFilter" ShareFilterIdent="PermissionTableFilter" >
+  <Controls>
+
+    <Control xsi:type="AutoCompleteControl" Ident="AccountID" DataType="Number" TitleResourceKey="AccountID_Utility">
+			<DataBind DefaultTitleResourceKey="SelectValue" DefaultValue="">
+        <Columns>
+          <Column Ident="ID" DataBindType="Value" />
+          <Column Ident="FullName" DataBindType="Title" />
+        </Columns>
+        <SQL>
+          SELECT acc.ID, CONCAT(acc.FullName, ' (', acc.ID, ')') AS FullName
+          FROM dbo.Account AS acc
+          WHERE 
+            acc.[State] = @ActiveState
+            AND (
+              acc.FullName LIKE @AccountID 
+              OR CAST(acc.ID AS VARCHAR(20)) LIKE @AccountID
+            )
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="AccountID" DataType="String" LikeType="Both" />
+					<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="ActiveState" DataType="Number" Value="1" />
+        </Parameters>
+      </DataBind>
+			<SelectedDataBind>
+        <Columns>
+          <Column Ident="ID" DataBindType="Value" />
+          <Column Ident="FullName" DataBindType="Title" />
+        </Columns>
+        <SQL>
+          SELECT acc.ID, CONCAT(acc.FullName, ' (', acc.ID, ')') AS FullName
+          FROM dbo.Account AS acc
+          WHERE acc.ID = @AccountID
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="AccountID" DataType="Number" />
+        </Parameters>
+      </SelectedDataBind>
+      <FilterConditions>
+        <DataSource>
+          <SQL>
+            tbl.AccountID = @AccountID
+          </SQL>
+        </DataSource>
+      </FilterConditions>
+		</Control>
+    
+    <Control xsi:type="AutoCompleteControl" Ident="PermissionID" DataType="String" TitleResourceKey="PermissionID_Utility">
+			<DataBind DefaultTitleResourceKey="SelectValue" DefaultValue="">
+        <Columns>
+          <Column Ident="ID" DataBindType="Value" />
+          <Column Ident="TextValue" DataBindType="Title" />
+        </Columns>
+        <SQL>
+          SELECT ID, ID AS TextValue
+          FROM dbo.Permission 
+          WHERE ID LIKE @PermissionID
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="PermissionID" DataType="String" LikeType="Both" />
+        </Parameters>
+      </DataBind>
+			<SelectedDataBind>
+        <Columns>
+          <Column Ident="Ident" DataBindType="Value" />
+          <Column Ident="Name" DataBindType="Title" />
+        </Columns>
+        <SQL>
+          SELECT ID, ID AS TextValue
+          FROM dbo.Permission 
+          WHERE ID LIKE @PermissionID
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="PermissionID" DataType="String" />
+        </Parameters>
+      </SelectedDataBind>
+      <FilterConditions>
+        <DataSource>
+          <SQL>
+            tbl.PermissionID = @PermissionID
+          </SQL>
+        </DataSource>
+      </FilterConditions>
+		</Control>
+
+    <Control xsi:type="EmptyControl" />
+    
+    <Control xsi:type="TextBoxControl" Ident="FormIdent" DataType="String" TitleResourceKey="FormIdent_Utility">
+      <FilterConditions>
+        <DataSource>
+          <SQL>
+            (tbl.FormIdent = @FormIdent OR tbl.FormIdent IS NULL)
+          </SQL>
+        </DataSource>
+      </FilterConditions>
+		</Control>
+    
+    <Control xsi:type="TextBoxControl" Ident="TableID" DataType="Number" TitleResourceKey="TableID_Utility">
+      <FilterConditions>
+        <DataSource>
+          <SQL>
+            (tbl.TableID = @TableID OR tbl.TableID < 0)
+          </SQL>
+        </DataSource>
+      </FilterConditions>
+		</Control>
+
+  </Controls>
+</Filter>

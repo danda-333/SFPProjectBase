@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__Dial__" SegmentType="Admin" PackageIdent="__ModuleName__">
+	<DataPermissions>
+		<string>SuperAdmin</string> <!-- Static -->
+	</DataPermissions>
+	<CreatePermissions>
+		<string>SuperAdmin</string>
+	</CreatePermissions>
+	<Buttons>
+		<Button xsi:type="FormButton" Ident="SaveButton" TitleResourceKey="SaveButton_SystemDial" IsSave="true" PlacementType="Top Bottom" ColorType="Primary" IconCssClass="icon-floppy-disk" IsVisible="false" />
+		<Button xsi:type="BackButton" Ident="BackButton" TitleResourceKey="BackButton_SystemDial" IconCssClass="icon-undo2" />
+	</Buttons>
+	<Controls>
+
+		<Control xsi:type="TextBoxControl" Ident="Ident" DataType="String" TitleResourceKey="Ident_SystemDial" IsRequired="true" IsReadOnly="true"/>
+		<Control xsi:type="TextBoxControl" Ident="TextValue" DataType="String" TitleResourceKey="TextValue_SystemDial" IsRequired="true" IsReadOnly="true"/>
+		<Control xsi:type="CheckBoxControl" Ident="IsActive" DataType="Bool" TitleResourceKey="IsActive_SystemDial" LabelPlacementType="Right" Default="1"/>
+
+		<Control xsi:type="DropDownListControl" Ident="LanguageID" DataType="SmallNumber" TitleResourceKey="LanguageID_SystemDial" IsRequired="true" IsReadOnly="true">
+			<DataBind>
+				<Columns>
+					<Column Ident="ID" Title="ID" DataBindType="Value"/>
+					<Column Ident="Name" Title="Name" DataBindType="Title"/>
+				</Columns>
+				<SQL>
+					SELECT lan.ID, lan.[Name] 
+					FROM dbo.Language AS lan
+					WHERE lan.[State] = @LanguageActiveState
+				</SQL>
+				<Parameters>
+					<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="LanguageActiveState" DataType="Number" Value="1"/>
+				</Parameters>
+			</DataBind>
+		</Control>
+
+	</Controls>
+	<Sections>
+		<Section xsi:type="HeaderSection" Ident="HeaderSection">
+			<HTMLTemplate>
+				<div class="row">
+					<div class="col-md-12">
+						<h3>ID: [%ACTUALFORM.ID%] | [%ACTUALFORM.AccountID%] </h3>
+					</div>
+				</div>
+			</HTMLTemplate>
+		</Section>
+		<Section xsi:type="ContentSection" Ident="BasicInformation" TitleResourceKey="BasicInformation_SystemDial">
+			<HTMLTemplate>
+
+				<fieldset>
+					<div class="row">
+						<div class="col-md-9">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<ControlLabel ControlID="TextValue" />
+										<Control ID="TextValue" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<ControlLabel ControlID="Ident" />
+										<Control ID="Ident" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<ControlLabel ControlID="LanguageID" />
+										<Control ID="LanguageID" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<Control ID="IsActive" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+
+			</HTMLTemplate>
+		</Section>
+	</Sections>
+</Form>
