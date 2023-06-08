@@ -1,0 +1,9 @@
+<CheatSheet 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" 
+  xmlns:wffc="http://www.gappex.com/sfp/WorkFlow/FormControl" 
+  xmlns:fi="http://www.gappex.com/sfp/Form/Indexes"
+  xmlns:fcs="http://www.gappex.com/sfp/Form/Control/Settings"
+>
+</CheatSheet>

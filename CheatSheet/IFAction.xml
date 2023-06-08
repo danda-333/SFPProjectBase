@@ -1,0 +1,22 @@
+<CheatSheet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+
+  <Action xsi:type="IF" ActionStart="BeforeValidation">
+    <Condition>
+      <SQL>
+        SELECT IIF(
+          @PaymentTermsIdent = 'Other'
+        , 1, 0)
+      </SQL>
+      <Parameters>
+        <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="PaymentTermsIdent" DataType="String"  />
+      </Parameters>
+    </Condition>
+    <TrueActions><Action xsi:type="Required" ActionStart="BeforeValidation">
+      <Idents>
+        <string>PaymentTermsOther</string>
+      </Idents>
+    </Action>
+    </TrueActions>
+  </Action>
+
+</CheatSheet>
