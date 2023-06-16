@@ -1,0 +1,35 @@
+// main: ./style.less
+
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  &>tbody {
+    &>tr {
+      &>td {
+        border: 1px solid #000;
+        padding: 0.5rem 1rem;
+        vertical-align: top;
+        page-break-inside: avoid;
+      }
+    }
+  }
+
+  &.content-table__b-0{
+    &>tbody {
+      &>tr {
+        &>td {
+          border: 0;
+        }
+      }
+    }
+  }
+}
+
+/* no content cell*/
+.ncc {
+  padding: 0 !important;
+}
+
+

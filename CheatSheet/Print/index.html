@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    window.onload = addPageNumbers;
+
+    function addPageNumbers() {
+      var totalPages = Math.ceil(document.body.scrollHeight / 1123);  //842px A4 pageheight for 72dpi, 1123px A4 pageheight for 96dpi, 
+      for (var i = 1; i <= totalPages; i++) {
+        var pageNumberDiv = document.createElement("div");
+        var pageNumber = document.createTextNode(i + "/" + totalPages);
+
+        pageNumberDiv.classList.add("page-counter");
+        pageNumberDiv.style.position = "absolute";
+        pageNumberDiv.style.top = "calc((" + i + " * (297mm - 0.5px - 13.5mm)) - 7mm)"; //297mm A4 pageheight; 0,5px unknown needed necessary correction value; additional wanted 40px margin from bottom(own element height included)
+        pageNumberDiv.style.height = "16px";
+        pageNumberDiv.innerHTML = '<span style="color: #a02042;">' + i +'</span>/' + totalPages;
+        document.body.insertBefore(pageNumberDiv, document.getElementById("content"));
+        pageNumberDiv.style.left = "calc(100% - (" + pageNumberDiv.offsetWidth + "px + 0px))";
+      }
+    }
+  </script>
+
+
+  <table class="print-table">
+    <thead>
+      <tr>
+        <td>
+          <!-- Hlavička dokumentu -->
+          <div class="print-header" style="padding-bottom: 7mm;">
+            <div style="border-bottom: 1px solid #d5d5d5; padding-bottom: 3mm; display: flex; justify-content: space-between; align-items: flex-end;">
+              <img src="./Content/Images/logo.svg" alt="">
+              <span style="font-weight: 700; color: #a02042; line-height: 1em;">More than value</span>
+            </div>
+          </div>
+          <!-- / Hlavička dokumentu -->
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <!-- Obsah dokumentu -->
+          <div class="print-page">
+            <table class="content-table content-table__b-0">
+              <tr>
+                <td class="ncc"><span style="font-size: 2.3rem;">Order Confirmation</span></td>
+                <td class="ncc" style="text-align: end; line-height: 0.9em;">
+                  <div>
+                    <span style="font-weight:600; font-size: 0.88rem; color: #767171;">Document No.:</span> <span style="font-weight: 700; font-size: 1.2rem;">23000116</span><br/>
+                    <span style="font-size: 0.62rem; color: #767171;">Please quote in all further correspondence</span>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <table class="content-table content-table__b-0" style="line-height: 1em; margin-top: 13mm;">
+              <tbody>
+                <colgroup>
+                  <col style="width: 5%;">
+                  <col style="width: 13%;">
+                  <col style="width: 20%;">
+                  <col style="width: 19%;">
+                  <col style="width: 17%;">
+                  <col style="width: 26%;">
+                </colgroup>
+                <tr>
+                  <td class="ncc" colspan="3">Customer</td>
+                  <td class="ncc" colspan="3"></td>
+                </tr>
+                <tr>
+                  <td class="ncc" colspan="3" style="font-size: 0.83rem; line-height: 1.4em; border-right: 1px solid #767171;">
+                    <b>Bond-Laminates GmbH</b><br/>
+                    <span style="color: #767171">Dr.Manfred Niemann</span><br/>
+                    <span style="color: #767171">Am Patbergschen Dorn 11</span><br/>
+                    <span style="color: #767171">59929 Brilon</span><br/>
+                    <span style="color: #767171">Germany</span>
+                  </td>
+                  <td class="ncc" colspan="3" style="font-size: 0.83rem; line-height: 1.4em; padding-left: 2.5mm !important;">
+                    <table class="content-table content-table__b-0">
+                      <tr>
+                        <colgroup>
+                          <col style="width: 47%;">
+                          <col style="width: auto;">
+                        </colgroup>
+                        <td class="ncc">
+                          Date of issue<span style="color: #767171">:</span> 2020-10-01<br/>
+                          <span style="color: #767171">Customer order:</span> 23000116<br/>
+                          <span style="color: #767171">Customer VAT:</span> 2020-10-01<br/>
+                        </td>
+                        <td class="ncc">
+                          <span style="color: #767171">Issued by:</span> Říhová Petra<br/>
+                          <span style="color: #767171">E-mail:</span> rihova@silon.eu<br/>
+                          <span style="color: #767171">Phone:</span> +420 777777777<br/>
+                        </td>
+                      </tr>
+                    </table>
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="6" style="height: 7mm;"></td>
+                </tr>
+                <tr style="font-size: 0.85rem;">
+                  <td class="ncc" style="border-bottom: 1px solid black;">No.</td>
+                  <td colspan="2" class="ncc" style="padding-bottom: 0.9mm !important; padding-left: 1mm !important; border-right: 1px solid black; border-bottom: 1px solid black;">Item description</td>
+                  <td class="ncc" style="text-align: end; padding-right: 2mm !important; border-right: 1px solid black; border-bottom: 1px solid black;">Quantity (kg)</td>
+                  <td class="ncc" style="text-align: end; padding-right: 2mm !important; border-right: 1px solid black; border-bottom: 1px solid black;">Unit price</td>
+                  <td class="ncc" style="text-align: end; padding-right: 2mm !important; border-bottom: 1px solid black;">Total</td>
+                </tr>
+                <tr>
+                  <td class="ncc" style="padding-top: 3mm !important;">1.</td>
+                  <td colspan="2" class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;">TABOCAB 4320</span><br/>
+                    <span style="font-size: 0.62rem; line-height: 0.8em; display: block; margin-top: 4mm;">Bag PE</span>
+                    <span style="font-size: 0.62em; line-height: 0.8em;">Custom tarrif code: 123456789</span></br/>
+                    <span style="font-size: 0.62rem; line-height: 0.5em;">Delivery date: 08.06.2023</span></br/>
+                    <span style="font-size: 0.62rem; line-height: 0.5em;">23BEDDDD19</span>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;">20 790,00</span><br/>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;">2,9200</span><br/>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;">60 706,80 EUR</span><br/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="ncc" style="padding-top: 3mm !important;">2.</td>
+                  <td colspan="2" class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;">TABOCAB 4320</span><br/>
+                    <span style="font-size: 0.62rem; line-height: 0.8em; display: block; margin-top: 4mm;">Bag PE</span>
+                    <span style="font-size: 0.62em; line-height: 0.8em;">Custom tarrif code: 123456789</span></br/>
+                    <span style="font-size: 0.62rem; line-height: 0.5em;">Delivery date: 08.06.2023</span></br/>
+                    <span style="font-size: 0.62rem; line-height: 0.5em;">23BEDDDD19</span>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;"></span><br/>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;"></span><br/>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;"></span><br/>
+                    <span style="font-size: 0.62rem;">Price to be specified later</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="ncc" style="padding-top: 3mm !important;">2.</td>
+                  <td colspan="2" class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;">TABOCAB 4320</span><br/>
+                    <span style="font-size: 0.62rem; line-height: 0.8em; display: block; margin-top: 4mm;">Bag PE</span>
+                    <span style="font-size: 0.62em; line-height: 0.8em;">Custom tarrif code: 123456789</span></br/>
+                    <span style="font-size: 0.62rem; line-height: 0.5em;">Delivery date: 08.06.2023</span></br/>
+                    <span style="font-size: 0.62rem; line-height: 0.5em;">23BEDDDD19</span>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;"></span><br/>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;"></span><br/>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;"></span><br/>
+                    <span style="font-size: 0.62rem;">Price to be specified later</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="ncc" style="padding-top: 3mm !important;">2.</td>
+                  <td colspan="2" class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;">TABOCAB 4320</span><br/>
+                    <span style="font-size: 0.62rem; line-height: 0.8em; display: block; margin-top: 4mm;">Bag PE</span>
+                    <span style="font-size: 0.62em; line-height: 0.8em;">Custom tarrif code: 123456789</span></br/>
+                    <span style="font-size: 0.62rem; line-height: 0.5em;">Delivery date: 08.06.2023</span></br/>
+                    <span style="font-size: 0.62rem; line-height: 0.5em;">23BEDDDD19</span>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;"></span><br/>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; border-right: 1px solid black; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;"></span><br/>
+                  </td>
+                  <td class="ncc" style="padding-top: 3.3mm !important; line-height: 0.8em; text-align: end; padding-right: 2mm !important;">
+                    <span style="font-size: 0.83rem; line-height: 1em; font-weight: 700;"></span><br/>
+                    <span style="font-size: 0.62rem;">Price to be specified later</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="6" style="height: 4mm;"></td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="ncc" style="border: 2px solid #a02042;"></td>
+                  <td colspan="2" class="ncc" style="border: 2px solid #a02042;"></td>
+                  <td colspan="2" class="" style="padding: 3.2mm 2mm; border: 2px solid #a02042; text-align: end;"> <span style="font-size: 0.85rem; letter-spacing: 1.5px; font-weight: 700;">Total net:</span> <span style="font-weight: 700; font-size: 1.25rem;">60 706,80 EUR</span></td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <div class="no-break">
+              <span style="display:block; margin-top: 6mm; font-weight: 700; font-size: 0.85rem;">Delivery terms (incoterms 2020):</span>
+              <p style="font-size: 0.6rem; line-height: 1.3em; margin-top: 0;">
+                DAP - Susteren<br/>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore facere libero tempore assumenda, neque reiciendis numquam illum, nam earum praesentium temporibus debitis. Hic qui perspiciatis animi laboriosam quae. Eaque quo eveniet voluptatibus numquam? Optio incidunt blanditiis deserunt dolor asperiores harum.
+              </p>
+
+              <span style="display:block; margin-top: 2.8mm; font-weight: 700; font-size: 0.85rem;">Shipping to address:</span>
+              <p style="font-size: 0.6rem; line-height: 1.3em; margin-top: 0;">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, velit!
+              </p>
+
+              <span style="display:block; margin-top: 2.8mm; font-weight: 700; font-size: 0.85rem;">Invoice address:</span>
+              <p style="font-size: 0.6rem; line-height: 1.3em; margin-top: 0;">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, velit!
+              </p>
+
+              <span style="display:block; margin-top: 2.8mm; font-weight: 700; font-size: 0.85rem;">Payment temrs:</span>
+              <p style="font-size: 0.6rem; line-height: 1.3em; margin-top: 0;">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, velit!
+              </p>
+            </div>
+          </div>
+          <!-- / Obsah dokumentu -->
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>
+          <!-- Patička -->
+          <div class="print-footer" style="font-size: 0.62rem; line-height: 1.2em;">
+            <table class="content-table content-table__b-0" >
+              <tr>
+                <td class="ncc"><b>SILON CZ s.r.o.</b></td>
+                <td class="ncc"></td>
+                <td class="ncc"></td>
+                <td class="ncc"></td>
+                <td class="ncc"></td>
+                <td class="ncc"></td>
+              </tr>
+              <tr>
+                <td class="ncc">
+                  Planá nad lužicí, Průmyslova 451,<br/>
+                  CZ - 39102 Sezimovo Ústí, Czech Republic
+                </td>
+                <td class="ncc">
+                  www.silon.cz<br/>
+                  silon@silon.cz
+                </td>
+                <td class="ncc">
+                  t: +420 381 621 111<br/>
+                  f: +420 381 291 048
+                </td>
+                <td class="ncc">
+                  IČ: 27157245<br/>
+                  DIČ: CZ27157245
+                </td>
+                <td class="ncc">
+                  Registry: OR KS Č. Budějovice<br/>
+                  Oddíl C, vložka 13494
+                </td>
+                <td class="ncc" style="font-size: 1.2rem;">
+                  <span style="color: #a02042;"></span>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="print-footer-spacemaker">
+            <table class="content-table content-table__b-0" >
+              <tr>
+                <td class="ncc"><b>SILON CZ s.r.o.</b></td>
+                <td class="ncc"></td>
+                <td class="ncc"></td>
+                <td class="ncc"></td>
+                <td class="ncc"></td>
+                <td class="ncc"></td>
+              </tr>
+              <tr>
+                <td class="ncc">
+                  Planá nad lužicí, Průmyslova 451,<br/>
+                  CZ - 39102 Sezimovo Ústí, Czech Republic
+                </td>
+                <td class="ncc">
+                  www.silon.cz<br/>
+                  silon@silon.cz
+                </td>
+                <td class="ncc">
+                  t: +420 381 621 111<br/>
+                  f: +420 381 291 048
+                </td>
+                <td class="ncc">
+                  IČ: 27157245<br/>
+                  DIČ: CZ27157245
+                </td>
+                <td class="ncc">
+                  Registry: OR KS Č. Budějovice<br/>
+                  Oddíl C, vložka 13494
+                </td>
+                <td class="ncc" style="font-size: 1.2rem;">
+                  <span style="color: #a02042;">10</span>/<span>10</span>
+                </td>
+              </tr>
+            </table>
+          </div>  
+          <!-- / Patička -->
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  
+</body>
+</html>
