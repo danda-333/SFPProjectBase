@@ -5,6 +5,7 @@
 "CreateDate___ModuleName__";"Vytvořeno";"1";"__ModuleName__";"False"
 "AccountID___ModuleName__";"Autor";"1";"__ModuleName__";"False"
 "SaveButton___ModuleName__";"Uložit";"1";"__ModuleName__";"False"
+"SaveAndExitButton___ModuleName__";"Uložit a zavřít";"1";"__ModuleName__";"False"
 "BackButton___ModuleName__";"Zpět";"1";"__ModuleName__";"False"
 "DeleteButton___ModuleName__";"Smazat";"1";"__ModuleName__";"False"
 "BasicInformation___ModuleName__";"Základní informace";"1";"__ModuleName__";"False"

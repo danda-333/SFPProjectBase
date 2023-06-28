@@ -21,3 +21,4 @@
 "DeleteDialogDescription_SystemDial";"Opravdu chcete smazat tento záznam?";"1";"SystemDial";"False"
 "BasicExport_SystemDial";"Export";"1";"SystemDial";"False"
 "SystemDialGroup_SystemDial";"Systémové číselníky";"1";"SystemDial";"False"
+"TranslationHasToBeCreatedForAllLanguagesJustOnce_Error_SystemDial";"Překlady musí být pro všechny jazyky zadány právě jednou";"1";"SystemDial";"False"

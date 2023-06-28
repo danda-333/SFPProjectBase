@@ -1,6 +1,0 @@
-Upload all files with extension "xml" inside this folder into Admin->XML->Configuration->[Upload]
-
-WARNING: please be aware of files contained in folders named "*-CompareBeforeUpload" and read the instructions attached (WARNING.txt)
-
-
-TIP: You can upload multiple files at once

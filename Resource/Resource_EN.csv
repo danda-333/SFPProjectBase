@@ -5,6 +5,7 @@
 "CreateDate___ModuleName__";"Created";"2";"__ModuleName__";"False"
 "AccountID___ModuleName__";"Creator";"2";"__ModuleName__";"False"
 "SaveButton___ModuleName__";"Save";"2";"__ModuleName__";"False"
+"SaveAndExitButton___ModuleName__";"Save and exit";"2";"__ModuleName__";"False"
 "BackButton___ModuleName__";"Back";"2";"__ModuleName__";"False"
 "DeleteButton___ModuleName__";"Delete";"2";"__ModuleName__";"False"
 "BasicInformation___ModuleName__";"Basic information";"2";"__ModuleName__";"False"

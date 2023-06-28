@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataView  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__DIAL__AllView" SegmentType="Admin" TitleResourceKey="TestDialAllView_SystemDial" GroupTitleResourceKey="SystemDialGroup_SystemDial" Priority="100" CountColorCssClass="primary" PackageIdent="__ModuleName__">
+  <AccessPermissions>
+    <string>SuperAdmin</string>
+  </AccessPermissions>
+  <Buttons>
+    <Button xsi:type="LinkButton" Ident="New__DIAL__Button" FormIdent="__DIAL__" TitleResourceKey="New__DIAL__Button_SystemDial" />
+  </Buttons>
+  <DataSource FormIdent="__DIAL__">
+    <DataPermissions>
+      <string>SuperAdmin</string>
+    </DataPermissions>
+		<Columns>
+      <Column Ident="ID" TitleResourceKey="ID_SystemDial" IsPrimaryKey="true" Width="10" IsVisible="true" DataType="Number"/>
+      <Column Ident="TextValue" TitleResourceKey="TextValue_SystemDial" Width="30" />
+      <Column Ident="Ident" TitleResourceKey="Ident_SystemDial" Width="15" />
+      <Column Ident="LanguageID" TitleResourceKey="LanguageID_SystemDial" Width="10" />
+      <Column Ident="CreateDate" TitleResourceKey="CreateDate_SystemDial" Width="10" DataType="DateTime"/>
+      <Column Ident="AccountID" TitleResourceKey="AccountID_SystemDial" Width="15" />
+      <Column xsi:type="BadgeColumn" ColorCssClassColumnIdent="IsActiveColor" IsTranslate="true" Ident="IsActive" TitleResourceKey="IsActive_SystemDial" Width="10" />
+		</Columns>
+		<SQL>
+      SELECT 
+        dial.ID
+        ,dial.TextValue
+        ,dial.Ident
+        ,lan.[Name] AS LanguageID
+        ,dial.CreateDate
+        ,accCreator.FullName AS AccountID
+        ,IIF(dial.IsActive = 1, 'Active_SystemDial', 'Inactive_SystemDial') AS IsActive
+        ,IIF(dial.IsActive = 1, 'success', 'danger') AS IsActiveColor
+      FROM usr.__DIAL__ AS dial
+      INNER JOIN dbo.Account AS accCreator ON accCreator.ID = dial.AccountID
+      INNER JOIN dbo.Language AS lan ON lan.ID = dial.LanguageID AND lan.ID = @UserLanguageID
+      WHERE
+        dial.[State] != @DeletedState
+    </SQL>
+		<Parameters>
+			<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UserLanguageID" DataType="Number" ConstantType="UserLanguageID" />
+		</Parameters>
+	</DataSource>
+
+  <CountDataSource>
+    <SQL>
+      SELECT COUNT(dial.ID)
+      FROM usr.__DIAL__ AS dial
+      INNER JOIN dbo.Language AS lan ON lan.ID = dial.LanguageID AND lan.ID = @UserLanguageID
+      WHERE
+        dial.[State] != @DeletedState
+    </SQL>
+    <Parameters>
+			<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+      <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UserLanguageID" DataType="Number" ConstantType="UserLanguageID" />
+    </Parameters>
+  </CountDataSource>
+
+</DataView>

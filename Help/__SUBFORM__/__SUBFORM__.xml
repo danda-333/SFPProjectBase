@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__SUBFORM__" SegmentType="__ModuleName__" PackageIdent="__ModuleName__" IsSubForm="true">
+	<DataPermissions>
+		<string>__ModuleName__</string> <!-- Static -->
+	</DataPermissions>
+	<CreatePermissions>
+		<string>__ModuleName__</string>
+	</CreatePermissions>
+	<Buttons>
+		<Button xsi:type="FormButton" Ident="Save" TitleResourceKey="SaveButton___ModuleName__" IsSave="true" PlacementType="Top Bottom" ColorType="Primary" IconCssClass="icon-floppy-disk" IsVisible="false" />
+
+		<Button xsi:type="FormButton" Ident="Delete" TitleResourceKey="DeleteButton___ModuleName__" IsSave="false" ColorType="Danger" PlacementType="Top Bottom" IsVisible="false" IconCssClass="icon-bin2">
+			<Extensions>
+				<Extension xsi:type="ConfirmDialogExtension" TitleResourceKey="DeleteDialogTitle___ModuleName__" DescriptionResourceKey="DeleteDialogDescription___ModuleName__" />
+			</Extensions>
+		</Button>
+		<Button xsi:type="BackButton" Ident="Back" TitleResourceKey="BackButton___ModuleName__" IconCssClass="icon-undo2" />
+	</Buttons>
+	<Controls>
+
+		<!-- <Control xsi:type="SubFormControl" Ident="__SubForm__" TextResourceKey="__SubForm_____ModuleName__" FormIdent="__SubForm__" InsertButtonIdent="Save" DeleteButtonIdent="Delete" UpdateButtonIdent="Save">
+      <DataSource>
+        <Columns>
+          <Column Ident="ID" TitleResourceKey="ID" IsPrimaryKey="true" IsVisible="false"/>
+          <Column Ident="Name" TitleResourceKey="Name___ModuleName__" Width="100"/>
+        </Columns>
+        <SQL>
+          SELECT 
+						__SubFormAlias__.ID
+            ,__SubFormAlias__.[Name]
+          FROM usr.__SubForm__ as __SubFormAlias__
+          WHERE 
+						__SubFormAlias__.[State] != @DeletedState 
+						AND __SubFormAlias__.TableID = @ID
+						AND __SubFormAlias__.FormIdent = @FormIdent
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ID" DataType="Number"/>
+          <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" Value="0" DataType="Number"/>
+          <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="FormIdent" DataType="String" Value="__SubForm__"/>
+        </Parameters>
+      </DataSource>
+    </Control> -->
+
+		<Control xsi:type="TextBoxControl" Ident="Name" DataType="String" TitleResourceKey="Name___ModuleName__" IsReadOnly="true"/>
+
+		<Control xsi:type="TextBoxControl" Ident="TableID" DataType="Number" />
+		<Control xsi:type="TextBoxControl" Ident="FormIdent" DataType="String" />
+
+	</Controls>
+	<Sections>
+		<Section xsi:type="ContentSection" Ident="BasicInformation" TitleResourceKey="BasicInformation___ModuleName__" IconCssClass="icon-bookmark">
+			<HTMLTemplate>
+
+				<fieldset>
+					<div class="row">
+						<div class="col-md-12">
+							<legend class="text-uppercase font-size-sm font-weight-bold">[#BasicInformation___ModuleName__#]</legend>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<ControlLabel ControlID="Name" />
+								<Control ID="Name" />
+							</div>
+						</div>
+					</div>
+				</fieldset>
+
+			</HTMLTemplate>
+		</Section>
+
+	</Sections>
+</Form>

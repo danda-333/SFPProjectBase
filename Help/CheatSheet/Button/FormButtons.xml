@@ -1,0 +1,21 @@
+<CheatSheet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+
+  <Button xsi:type="FormButton" Ident="ApproveButton" TitleResourceKey="ApproveButton___ModuleName__" IsSave="true" PlacementType="Top Bottom" IsVisible="false" ColorType="Success" IconCssClass="icon-checkmark"/> <!-- Schválit-->
+
+  <Button xsi:type="FormButton" Ident="RejectButton" TitleResourceKey="RejectButton___ModuleName__" IsSave="true" PlacementType="Top Bottom" IsVisible="false" ColorType="Danger" IconCssClass="icon-cross2"/> <!-- Zamítnout -->
+
+  <Button xsi:type="FormButton" Ident="SendToApprove" TitleResourceKey="SendToApproveButton___ModuleName__" IsSave="true" PlacementType="Top Bottom" IsVisible="false" ColorType="Primary" IconCssClass="icon-forward"/> <!-- Odeslat ke schálení -->
+
+  <Button xsi:type="FormButton" Ident="SaveButton" TitleResourceKey="SaveButton___ModuleName__" IsSave="true" PlacementType="Top Bottom" ColorType="Primary" IconCssClass="icon-floppy-disk" IsVisible="false" IsStopRedirect="true"/> <!-- Uložit -->
+
+  <Button xsi:type="FormButton" Ident="SaveAndExitButton" TitleResourceKey="SaveAndExitButton___ModuleName__" IsSave="true" PlacementType="Top Bottom" ColorType="Primary" IconCssClass="icon-floppy-disk" IsVisible="false"/> <!-- Uložit a zavřít--> 
+
+  <Button xsi:type="FormButton" Ident="DeleteButton" TitleResourceKey="DeleteButton___ModuleName__" IsSave="false" ColorType="Danger" PlacementType="Top Bottom" IsVisible="false" IconCssClass="icon-bin2"> <!-- Smazat -->
+    <Extensions>
+      <Extension xsi:type="ConfirmDialogExtension" TitleResourceKey="DeleteDialogTitle___ModuleName__" DescriptionResourceKey="DeleteDialogDescription___ModuleName__" />
+    </Extensions>
+  </Button>
+
+  <Button xsi:type="BackButton" Ident="BackButton" TitleResourceKey="BackButton___ModuleName__" IconCssClass="icon-undo2" /> <!-- Zpět -->
+
+</CheatSheet>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataView  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__Dial__AllView" SegmentType="Admin" TitleResourceKey="__Dial__AllView_SystemDial" GroupTitleResourceKey="SystemDialGroup_SystemDial" Priority="100" CountColorCssClass="primary" PackageIdent="__ModuleName__">
+  <AccessPermissions>
+    <string>SuperAdmin</string>
+  </AccessPermissions>
+  <Buttons>
+    <Button xsi:type="LinkButton" Ident="New__Dial__Button" FormIdent="__Dial__" TitleResourceKey="New__Dial__Button_SystemDial" />
+  </Buttons>
+  <DataSource FormIdent="__Dial__">
+    <DataPermissions>
+      <string>SuperAdmin</string>
+    </DataPermissions>
+		<Columns>
+      <Column Ident="ID" TitleResourceKey="ID_SystemDial" IsPrimaryKey="true" Width="10" IsVisible="true" DataType="Number"/>
+      <Column Ident="TextValue" TitleResourceKey="TextValue_SystemDial" Width="55" />
+      <Column Ident="CreateDate" TitleResourceKey="CreateDate_SystemDial" Width="10" DataType="DateTime"/>
+      <Column Ident="AccountID" TitleResourceKey="AccountID_SystemDial" Width="15" />
+      <Column xsi:type="BadgeColumn" ColorCssClassColumnIdent="IsActiveColor" IsTranslate="true" Ident="IsActive" TitleResourceKey="IsActive_SystemDial" Width="10" />
+		</Columns>
+		<SQL>
+      SELECT 
+        dial.ID
+        ,dial.TextValue
+        ,dial.CreateDate
+        ,accCreator.FullName AS AccountID
+        ,IIF(dial.IsActive = 1, 'Active_SystemDial', 'Inactive_SystemDial') AS IsActive
+        ,IIF(dial.IsActive = 1, 'success', 'danger') AS IsActiveColor
+      FROM usr.__Dial__ AS dial
+      INNER JOIN dbo.Account AS accCreator ON accCreator.ID = dial.AccountID
+      WHERE
+        dial.[State] != @DeletedState
+    </SQL>
+		<Parameters>
+			<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+		</Parameters>
+	</DataSource>
+
+  <CountDataSource>
+    <SQL>
+      SELECT COUNT(dial.ID)
+      FROM usr.__Dial__ AS dial
+      WHERE
+        dial.[State] != @DeletedState
+    </SQL>
+    <Parameters>
+			<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+    </Parameters>
+  </CountDataSource>
+
+</DataView>

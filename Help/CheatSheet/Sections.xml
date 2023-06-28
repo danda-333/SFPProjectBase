@@ -1,0 +1,21 @@
+<CheatSheet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+
+  <Section xsi:type="ContentSection" Ident="BasicInformation" TitleResourceKey="BasicInformation___ModuleName__" IconCssClass="icon-bookmark">
+    <HTMLTemplate>
+
+    </HTMLTemplate>
+  </Section> <!-- Základní informace -->
+
+  <Section xsi:type="ContentSection" Ident="TimeLine" TitleResourceKey="TimeLine___ModuleName__" IconCssClass="icon-history">
+    <HTMLTemplate>
+      <fieldset>
+        <div class="row">
+          <div class="col-md-12">
+            <Control ID="TimeLine" />
+          </div>
+        </div>
+      </fieldset>
+    </HTMLTemplate>
+  </Section> <!-- TimeLine -->
+
+</CheatSheet>

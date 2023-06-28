@@ -1,0 +1,21 @@
+<CheatSheet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+
+  <HTMLTemplate>
+
+    <div class="card">
+      <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">__Nadpis__</h6>
+        <div class="header-elements">
+          <div class="list-icons">
+            <a class="list-icons-item" data-action="collapse" />
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        __Obsah__
+      </div>
+    </div>
+
+  </HTMLTemplate>
+
+</CheatSheet>

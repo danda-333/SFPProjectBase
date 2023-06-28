@@ -1,0 +1,16 @@
+<CheatSheet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+
+  <Controls>
+    <Control xsi:type="TextBoxControl" Ident="__ControlIdent__" DataType="String" TitleResourceKey="__ControlIdent_____ModuleName__"/>
+  </Controls>
+
+  <HTMLTemplate>
+
+    <div class="form-group ">
+      <ControlLabel ControlID="__ControlIdent__" />
+      <Control ID="__ControlIdent__" />
+    </div>
+    
+  </HTMLTemplate>
+
+</CheatSheet>

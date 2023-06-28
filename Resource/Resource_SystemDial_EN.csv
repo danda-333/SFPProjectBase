@@ -21,3 +21,4 @@
 "DeleteDialogDescription_SystemDial";"Are you sure you want to delete this record?";"2";"SystemDial";"False"
 "BasicExport_SystemDial";"Export";"2";"SystemDial";"False"
 "SystemDialGroup_SystemDial";"System dials";"2";"SystemDial";"False"
+"TranslationHasToBeCreatedForAllLanguagesJustOnce_Error_SystemDial";"Translation has to be created for all languages just once";"2";"SystemDial";"False"

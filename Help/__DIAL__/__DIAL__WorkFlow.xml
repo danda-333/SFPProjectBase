@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WorkFlow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Ident="__Dial__WorkFlow" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" FormIdent="__Dial__" PackageIdent="__ModuleName__">
+  <Definition>
+    <States>
+      <State Value="0" TitleResourceKey="Deleted_SystemDial" ColorCssClass="danger"/> <!--Deleted-->
+      <State Value="1" TitleResourceKey="New_SystemDial" ColorCssClass="warning"/> <!--New-->
+      <State Value="2" TitleResourceKey="Saved_SystemDial" ColorCssClass="primary"/> <!--Saved-->  
+    </States>
+  </Definition>
+
+  <ControlShareCodes>
+    <ControlShareCode Ident="EnableAllControlShare">
+      <Controls>
+        <FormControl Ident="TextValue" IsReadOnly="false" />
+        <FormControl Ident="IsActive" IsReadOnly="false" />
+      </Controls>
+    </ControlShareCode> <!-- <FormControl xsi:type="ShareCodeControl" Ident="EnableAllControlShare" /> -->
+  </ControlShareCodes> 
+
+  <ButtonShareCodes>
+
+    <ButtonShareCode Ident="SaveFirstStateButtonShare">
+      <Buttons>
+        <Button Ident="SaveButton" IsVisible="true">
+          <Actions>
+            <Action xsi:type="ChangeState" State="2" ActionStart="AfterSave" />
+          </Actions>
+        </Button>
+      </Buttons>
+    </ButtonShareCode> <!-- <Button xsi:type="ShareCodeButton" Ident="SaveFirstStateButtonShare" />  -->
+
+    <ButtonShareCode Ident="SaveButtonShare">
+      <Buttons>
+        <Button Ident="SaveButton" IsVisible="true">
+          <Actions>
+          </Actions>
+        </Button>
+      </Buttons>
+    </ButtonShareCode> <!-- <Button xsi:type="ShareCodeButton" Ident="SaveButtonShare" />  -->
+
+  </ButtonShareCodes> 
+
+  <Steps>
+    <Step State="1">
+      <Groups>
+        <Group>
+          <Permissions>
+            <string>SuperAdmin</string>
+          </Permissions>
+          <Buttons>
+            <Button xsi:type="ShareCodeButton" Ident="SaveFirstStateButtonShare" />
+          </Buttons>
+          <Sections>
+            <Section Ident="HeaderSection" IsVisible="false" />
+          </Sections>
+          <Controls>
+            <FormControl xsi:type="ShareCodeControl" Ident="EnableAllControlShare" />
+          </Controls>
+        </Group>
+      </Groups>
+    </Step> <!--New-->
+    <Step State="2">
+      <Groups>
+        <Group>
+          <Permissions>
+            <string>SuperAdmin</string>
+          </Permissions>
+          <Buttons>
+            <Button xsi:type="ShareCodeButton" Ident="SaveButtonShare" />
+          </Buttons>
+          <Controls>
+            <FormControl xsi:type="ShareCodeControl" Ident="EnableAllControlShare" />
+          </Controls>
+        </Group>
+      </Groups>
+    </Step> <!--Saved-->
+    
+  </Steps>
+</WorkFlow>

@@ -1,0 +1,23 @@
+<CheatSheet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+
+  <Sources>
+    <DataSource Ident="MainInfo">
+      <Columns>
+        <Column Ident="__ColumnIdent__" />
+      </Columns>
+      <SQL>
+        __SQLSELECT__
+      </SQL>
+      <Parameters>
+        <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ID" DataType="Number" />
+      </Parameters>
+    </DataSource>
+  </Sources>
+
+  <HTMLTemplate>
+    [FOR Source="MainInfo"]
+      [%__ColumnIdent__%]
+    [/FOR]
+  </HTMLTemplate>
+
+</CheatSheet>
