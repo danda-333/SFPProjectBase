@@ -22,3 +22,6 @@
 "BasicExport_SystemDial";"Export";"2";"SystemDial";"False"
 "SystemDialGroup_SystemDial";"System dials";"2";"SystemDial";"False"
 "TranslationHasToBeCreatedForAllLanguagesJustOnce_Error_SystemDial";"Translation has to be created for all languages just once";"2";"SystemDial";"False"
+"PrimaryLanguage_SystemDial";"Primary language";"2";"SystemDial";"False"
+"OtherLanguages_SystemDial";"Other languages";"2";"SystemDial";"False"
+"OrderValue_SystemDial";"Order";"2";"SystemDial";"False"

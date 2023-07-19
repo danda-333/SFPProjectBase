@@ -1,0 +1,43 @@
+<CheatSheet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+
+  <Controls>
+    
+    <Control xsi:type="DropDownListControl" Ident="__ControlIdent__" DataType="String" TitleResourceKey="__ControlIdent_____ModuleName__" IsReadOnly="true">
+			<DataBind DefaultTitleResourceKey="SelectValue___ModuleName__" DefaultValue="">
+				<Columns>
+					<Column Ident="Ident" DataBindType="Value" />
+					<Column Ident="TextValue" DataBindType="Title" />
+				</Columns>
+				<SQL>
+					SELECT DISTINCT dial.Ident, dial.TextValue
+					FROM usr.__Dial__ AS dial
+					WHERE 
+						(
+							dial.Ident = @__ControlIdent__
+							OR (
+								dial.[State] != @DeletedState
+								AND dial.IsActive = 1
+							)
+						) AND dial.LanguageID = @UserLanguageID
+					ORDER BY dial.TextValue ASC
+				</SQL>
+				<Parameters>
+					<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0"/>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="__ControlIdent__" DataType="String"/>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UserLanguageID" ConstantType="UserLanguageID" DataType="Number"/>
+				</Parameters>
+			</DataBind>
+		</Control>
+
+  </Controls>
+
+  <HTMLTemplate>
+
+    <div class="form-group ">
+      <ControlLabel ControlID="__ControlIdent__" />
+      <Control ID="__ControlIdent__" />
+    </div>
+    
+  </HTMLTemplate>
+
+</CheatSheet>

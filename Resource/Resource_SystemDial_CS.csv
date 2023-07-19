@@ -22,3 +22,6 @@
 "BasicExport_SystemDial";"Export";"1";"SystemDial";"False"
 "SystemDialGroup_SystemDial";"Systémové číselníky";"1";"SystemDial";"False"
 "TranslationHasToBeCreatedForAllLanguagesJustOnce_Error_SystemDial";"Překlady musí být pro všechny jazyky zadány právě jednou";"1";"SystemDial";"False"
+"PrimaryLanguage_SystemDial";"Primární jazyk";"1";"SystemDial";"False"
+"OtherLanguages_SystemDial";"Ostatní jazyky";"1";"SystemDial";"False"
+"OrderValue_SystemDial";"Řazení";"1";"SystemDial";"False"
