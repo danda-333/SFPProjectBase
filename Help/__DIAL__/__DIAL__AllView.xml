@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DataView  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__Dial__AllView" SegmentType="Admin" TitleResourceKey="__Dial__AllView_SystemDial" GroupTitleResourceKey="SystemDialGroup_SystemDial" Priority="100" CountColorCssClass="primary" PackageIdent="__ModuleName__">
+<DataView xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__Dial__AllView" SegmentType="Admin" TitleResourceKey="__Dial__AllView_SystemDial" GroupTitleResourceKey="SystemDialGroup_SystemDial" Priority="100" CountColorCssClass="primary" PackageIdent="__ModuleName__Package">
   <AccessPermissions>
     <string>SuperAdmin</string>
   </AccessPermissions>

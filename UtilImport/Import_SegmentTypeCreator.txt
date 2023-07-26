@@ -1,1 +1,1 @@
-__ModuleName__;__ModuleName__
+__ModuleName__Segment;__ModuleName__

@@ -1,0 +1,63 @@
+<CheatSheet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+
+  <Controls>
+    
+    <Control xsi:type="AutoCompleteControl" Ident="__ControlIdent__" DataType="Number" TitleResourceKey="__ControlIdent_____ModuleName__" IsReadOnly="true">
+			<DataBind DefaultTitleResourceKey="SelectValue" DefaultValue="">
+				<Columns>
+					<Column Ident="ID" DataBindType="Value" />
+					<Column Ident="FullName" DataBindType="Title" />
+				</Columns>
+				<SQL>
+					SELECT acc.ID, acc.FullName 
+					FROM dbo.Account AS acc
+					INNER JOIN dbo.AccountPermissionStaticComputed AS aps ON acc.ID = aps.AccountID AND aps.PermissionID = '__ModuleName__' /* Omezení výberu pouze pro uřivatele s přístupem */
+					WHERE 
+						acc.[State] = @AccountActiveState
+						AND acc.FullName like @__ControlIdent__
+				</SQL>
+				<Parameters>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="__ControlIdent__" DataType="String" LikeType="Both" />
+					<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="AccountActiveState" DataType="Number" Value="1" />
+				</Parameters>
+			</DataBind>
+			<SelectedDataBind>
+				<Columns>
+					<Column Ident="ID" DataBindType="Value" />
+					<Column Ident="FullName" DataBindType="Title" />
+				</Columns>
+				<SQL>
+					SELECT acc.ID, acc.FullName 
+					FROM dbo.Account AS acc
+					WHERE 
+						acc.ID = @__ControlIdent__
+				</SQL>
+				<Parameters>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="__ControlIdent__" DataType="Number" />
+				</Parameters>
+			</SelectedDataBind>
+			<DefaultDataSource>
+				<Columns>
+					<Column Ident="__ControlIdent__" />
+				</Columns>
+				<SQL>
+					SELECT @UserID AS __ControlIdent__
+				</SQL>
+				<Parameters>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UserID" DataType="Number" ConstantType="UserID" />
+				</Parameters>
+			</DefaultDataSource>
+		</Control>
+
+  </Controls>
+
+  <HTMLTemplate>
+
+    <div class="form-group ">
+      <ControlLabel ControlID="__ControlIdent__" />
+      <Control ID="__ControlIdent__" />
+    </div>
+    
+  </HTMLTemplate>
+
+</CheatSheet>

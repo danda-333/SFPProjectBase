@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__DIAL__" SegmentType="Admin" PackageIdent="__ModuleName__">
+<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__DIAL__" SegmentType="Admin" PackageIdent="__ModuleName__Package">
 	<DataPermissions>
 		<string>SuperAdmin</string> <!-- Static -->
 	</DataPermissions>
@@ -83,7 +83,7 @@
 				</div>
 			</HTMLTemplate>
 		</Section>
-		<Section xsi:type="ContentSection" Ident="BasicInformation" TitleResourceKey="BasicInformation_SystemDial">
+		<Section xsi:type="ContentSection" Ident="BasicInformationSection" TitleResourceKey="BasicInformationSection_SystemDial">
 			<HTMLTemplate>
 
 				<style>

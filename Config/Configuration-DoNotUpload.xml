@@ -4,7 +4,7 @@
     <Section xsi:type="SegmentSection">
       <Segments>
         <!-- [1] Start copying after this line -->
-        <Segment SegmentType="__ModuleName__" IconCssClass="icon-briefcase" TitleResourceKey="__ModuleName_____ModuleName__" Url="~/Segment/Index/__ModuleName__" RoleName="Role__ModuleName__"/>
+        <Segment SegmentType="__ModuleName__Segment" IconCssClass="icon-briefcase" TitleResourceKey="__ModuleName__Segment___ModuleName__" Url="~/Segment/Index/__ModuleName__Segment" RoleName="Role__ModuleName__"/>
         <!-- [1] Stop copying before this line -->
       </Segments>
     </Section>

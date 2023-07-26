@@ -57,7 +57,7 @@
 				</div>
 			</HTMLTemplate>
 		</Section>
-		<Section xsi:type="ContentSection" Ident="BasicInformation" TitleResourceKey="BasicInformation_SystemDial">
+		<Section xsi:type="ContentSection" Ident="BasicInformationSection" TitleResourceKey="BasicInformationSection_SystemDial">
 			<HTMLTemplate>
 
 				<td>

@@ -1,0 +1,12 @@
+.textarea-3row > textarea{
+  height: 158px;
+}
+.textarea-4row > textarea{
+  height: 223px;
+}
+.checkbox-1row > .form-check{
+  margin-bottom: 18px;
+}
+.duallistbox-5row .duallistbox .box {
+  height: 191px;
+}

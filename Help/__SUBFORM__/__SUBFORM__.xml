@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__SUBFORM__" SegmentType="__ModuleName__" PackageIdent="__ModuleName__" IsSubForm="true">
+<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__SUBFORM__" SegmentType="__ModuleName__Segment" PackageIdent="__ModuleName__" IsSubForm="true">
 	<DataPermissions>
 		<string>__ModuleName__</string> <!-- Static -->
 	</DataPermissions>
@@ -49,24 +49,22 @@
 
 	</Controls>
 	<Sections>
-		<Section xsi:type="ContentSection" Ident="BasicInformation" TitleResourceKey="BasicInformation___ModuleName__" IconCssClass="icon-bookmark">
+		<Section xsi:type="ContentSection" Ident="BasicInformationSection" TitleResourceKey="BasicInformationSection___ModuleName__" IconCssClass="icon-bookmark">
 			<HTMLTemplate>
 
-				<fieldset>
-					<div class="row">
-						<div class="col-md-12">
-							<legend class="text-uppercase font-size-sm font-weight-bold">[#BasicInformation___ModuleName__#]</legend>
+				<div class="row">
+					<div class="col-md-12">
+						<legend class="text-uppercase font-size-sm font-weight-bold">[#BasicInformation___ModuleName__#]</legend>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<ControlLabel ControlID="Name" />
+							<Control ID="Name" />
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<ControlLabel ControlID="Name" />
-								<Control ID="Name" />
-							</div>
-						</div>
-					</div>
-				</fieldset>
+				</div>
 
 			</HTMLTemplate>
 		</Section>
