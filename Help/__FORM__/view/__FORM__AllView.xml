@@ -61,6 +61,8 @@
     </SQL>
 		<Parameters>
 			<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+      <!-- <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="StartPage" ConstantType="StartPage" DataType="Number" /> -->
+      <!-- <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="EndPage" ConstantType="EndPage" DataType="Number" /> -->
 		</Parameters>
 	</DataSource>
 
