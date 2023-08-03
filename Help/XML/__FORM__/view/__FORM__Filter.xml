@@ -1,0 +1,18 @@
+<Filter xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Ident="__Form__Filter" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+	<Controls>
+
+    <Control xsi:type="ListBoxControl" Ident="State" DataType="NumberList" TitleResourceKey="State___ModuleName__" >
+      <ListItems>
+        <ListItem TitleResourceKey="Saved___ModuleName__" Value="2" />
+      </ListItems>
+      <FilterConditions>
+        <DataSource>
+          <SQL>
+            __FormAlias__.[State] IN (SELECT ID FROM @State) 
+          </SQL>
+        </DataSource>
+      </FilterConditions>
+    </Control>
+    
+	</Controls>
+</Filter>

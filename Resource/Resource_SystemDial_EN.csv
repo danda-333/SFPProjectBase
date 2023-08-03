@@ -7,7 +7,7 @@
 "Active_SystemDial";"Active";"2";"SystemDial";"False"
 "Inactive_SystemDial";"Inactive";"2";"SystemDial";"False"
 "State_SystemDial";"Status";"2";"SystemDial";"False"
-"CreateDate_SystemDial";"Created";"2";"SystemDial";"False"
+"CreateDate_SystemDial";"Create date and time";"2";"SystemDial";"False"
 "AccountID_SystemDial";"Creator";"2";"SystemDial";"False"
 "SaveButton_SystemDial";"Save";"2";"SystemDial";"False"
 "BackButton_SystemDial";"Back";"2";"SystemDial";"False"
@@ -27,3 +27,4 @@
 "PrimaryLanguage_SystemDial";"Primary language";"2";"SystemDial";"False"
 "OtherLanguages_SystemDial";"Other languages";"2";"SystemDial";"False"
 "OrderValue_SystemDial";"Order";"2";"SystemDial";"False"
+"Setting_SystemDiall";"Setting";"2";"SystemDial";"False"

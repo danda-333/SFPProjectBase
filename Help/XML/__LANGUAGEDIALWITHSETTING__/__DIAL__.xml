@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__DIAL__" SegmentType="Admin" PackageIdent="__ModuleName__Package">
+	<DataPermissions>
+		<string>SuperAdmin</string> <!-- Static -->
+	</DataPermissions>
+	<CreatePermissions>
+		<string>SuperAdmin</string>
+	</CreatePermissions>
+	<Buttons>
+		<Button xsi:type="FormButton" Ident="SaveButton" TitleResourceKey="SaveButton_SystemDial" IsSave="true" PlacementType="Top Bottom" ColorType="Primary" IconCssClass="icon-floppy-disk" IsVisible="false" />
+		<Button xsi:type="BackButton" Ident="BackButton" TitleResourceKey="BackButton_SystemDial" IconCssClass="icon-undo2" />
+	</Buttons>
+	<Controls>
+
+		<Control xsi:type="HiddenControl" Ident="Ident" DataType="Number"/>
+
+		<Control xsi:type="TextBoxControl" Ident="TextValue" DataType="String" TitleResourceKey="TextValue_SystemDial" IsRequired="true" IsReadOnly="true"/>
+		<Control xsi:type="DropDownListControl" Ident="LanguageID" DataType="SmallNumber" TitleResourceKey="LanguageID_SystemDial" IsRequired="true" IsReadOnly="true">
+			<DataBind>
+				<Columns>
+					<Column Ident="ID" DataBindType="Value"/>
+					<Column Ident="Name" DataBindType="Title"/>
+				</Columns>
+				<SQL>
+					SELECT lan.ID, lan.[Name] 
+					FROM dbo.Language AS lan
+					WHERE 
+						lan.[ID] = @UserLanguageID
+				</SQL>
+				<Parameters>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UserLanguageID" DataType="Number" ConstantType="UserLanguageID" />
+				</Parameters>
+			</DataBind>
+		</Control>
+
+		
+		<!-- <Control xsi:type="DropDownListControl" Ident="__DIAL__Ident" DataType="Number" TitleResourceKey="__DIAL__Ident___ModuleName__" IsReadOnly="true">
+			<DataBind DefaultTitleResourceKey="SelectValue___ModuleName__" DefaultValue="">
+				<Columns>
+					<Column Ident="Ident" DataBindType="Value" />
+					<Column Ident="TextValue" DataBindType="Title" />
+				</Columns>
+				<SQL>
+					SELECT DISTINCT dial.Ident, dial.TextValue
+					FROM usr.__DIAL__ AS dial
+					WHERE 
+						(
+							dial.Ident = @__DIAL__Ident
+							OR (
+								dial.[State] != @DeletedState
+								AND dial.IsActive = 1
+							)
+						) AND dial.LanguageID = @UserLanguageID
+					ORDER BY dial.TextValue ASC
+				</SQL>
+				<Parameters>
+					<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0"/>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="__DIAL__Ident" DataType="String"/>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UserLanguageID" ConstantType="UserLanguageID" DataType="Number"/>
+				</Parameters>
+			</DataBind>
+		</Control> -->
+
+		<Control xsi:type="CheckBoxControl" Ident="IsActive" DataType="Bool" TitleResourceKey="IsActive_SystemDial" LabelPlacementType="Right" Default="1" />
+		<Control xsi:type="TextBoxControl" Ident="OrderValue" DataType="Number" TitleResourceKey="OrderValue_SystemDial" IsRequired="true" IsReadOnly="true" />
+
+		<Control xsi:type="TextBoxControl" Ident="Setting" DataType="String" TitleResourceKey="Setting_ExitSheetDial" IsReadOnly="true" IsCreateColumn="false">
+			<DefaultDataSource>
+				<Columns>
+					<Column Ident="Setting" />
+				</Columns>
+				<SQL>
+					SELECT TOP(1) Setting AS Setting
+					FROM usr.ExitSheetItemToApprovalSetting
+					WHERE 
+						Ident = @Ident
+				</SQL>
+				<Parameters>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="Ident" DataType="Number" />
+				</Parameters>
+			</DefaultDataSource>
+		</Control>
+
+		<Control xsi:type="InlineSubFormControl" Ident="__DIAL__Fake" TextResourceKey="__DIAL__Fake_SystemDial" FormIdent="__DIAL__Fake" InsertButtonIdent="SaveButton" DeleteButtonIdent="DeleteButton" UpdateButtonIdent="SaveButton" IsReadOnly="true">
+      <DataSource>
+        <Columns>
+          <Column Ident="ID" TitleResourceKey="ID" IsPrimaryKey="true" IsVisible="false"/>
+          <Column Ident="TextValue" TitleResourceKey="TextValue_SystemDial" Width="60"/>
+          <Column Ident="LanguageID" TitleResourceKey="LanguageID_SystemDial" Width="35"/>
+					<Column xsi:type="DeleteColumn" Ident="ID" TitleResourceKey="DeleteButton_SystemDial" Width="5" />
+        </Columns>
+        <SQL>
+          SELECT 
+						dialOther.ID
+            ,dialOther.TextValue
+						,lan.[Name] as LanguageID
+					FROM usr.__DIAL__ AS dialThis
+          INNER JOIN usr.__DIAL__ as dialOther ON dialOther.Ident = dialThis.Ident AND dialOther.[State] != @DeletedState AND dialThis.ID != dialOther.ID
+					INNER JOIN dbo.Language AS lan ON lan.ID = dialOther.LanguageID
+          WHERE 
+						dialThis.ID = @ID
+					ORDER BY dialOther.LanguageID ASC
+        </SQL>
+        <Parameters>
+          <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ID" DataType="Number"/>
+          <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" Value="0" DataType="Number"/>
+        </Parameters>
+      </DataSource>
+    </Control>
+
+		<Control xsi:type="HiddenControl" Ident="TableID" DataType="Number"/>
+
+	</Controls>
+	<Sections>
+		<Section xsi:type="HeaderSection" Ident="HeaderSection">
+			<HTMLTemplate>
+				<div class="row">
+					<div class="col-md-12">
+						<h3>ID: [%ACTUALFORM.ID%] | [%ACTUALFORM.AccountID%] </h3>
+					</div>
+				</div>
+			</HTMLTemplate>
+		</Section>
+		<Section xsi:type="ContentSection" Ident="BasicInformationSection" TitleResourceKey="BasicInformationSection_SystemDial">
+			<HTMLTemplate>
+
+				<style>
+					.no-label > label {
+						display: none !important;
+					}
+
+					.custom-table td,
+					.custom-table th {
+						padding: .15rem .5rem !important;
+					}
+
+					
+					.visibility-hidden {
+						visibility: hidden;
+					}
+				</style>
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<ControlLabel ControlID="Ident" />
+							<Control ID="Ident" />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-9">
+						<div class="row">
+							<div class="col-md-12">
+								<legend class="text-uppercase font-size-sm font-weight-bold">[#PrimaryLanguage_SystemDial#]</legend>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+
+								<div class="form-group custom-table">
+									<div class="table-responsive">
+										<table class="table table-hover table-striped table-togglable border-bottom-1 border-bottom-grey-300">
+											<thead>
+												<tr>
+													<th style="width: 60%">[#TextValue_SystemDial#]</th>
+													<th style="width: 35%">[#LanguageID_SystemDial#]</th>
+													<th style="width: 5%"><span class="visibility-hidden">[#DeleteButton_ExitSheetDial#]</span></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<Control ID="TextValue" />
+													</td>
+													<td>
+														<Control ID="LanguageID" />
+													</td>
+													<td>
+														<a href="javascript:void(0);" class="visibility-hidden">
+															<i class="icon-bin"></i>
+														</a>
+													</td>
+
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div class="row mt-2">
+							<div class="col-md-12">
+								<legend class="text-uppercase font-size-sm font-weight-bold">[#OtherLanguages_SystemDial#]</legend>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+		
+								<div class="form-group custom-table">
+									<Control ID="__DIAL__Fake" />
+								</div>
+							
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="row">
+							<div class="col-md-12">
+								<legend class="text-uppercase font-size-sm font-weight-bold">[#Setting_SystemDial#]</legend>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<ControlLabel ControlID="OrderValue" />
+									<Control ID="OrderValue" />
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group no-label">
+									<Control ID="IsActive" />
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<ControlLabel ControlID="Setting" />
+									<Control ID="Setting" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				
+
+			</HTMLTemplate>
+		</Section>
+	</Sections>
+</Form>

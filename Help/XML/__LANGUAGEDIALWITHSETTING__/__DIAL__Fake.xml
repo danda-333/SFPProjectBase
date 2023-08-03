@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__DIAL__Fake" SegmentType="Admin" PackageIdent="__ModuleName__" MainIdent="__DIAL__">
+	<DataPermissions>
+		<string>SuperAdmin</string> <!-- Static -->
+	</DataPermissions>
+	<CreatePermissions>
+		<string>SuperAdmin</string>
+	</CreatePermissions>
+	<Buttons>
+		<Button xsi:type="FormButton" Ident="SaveButton" TitleResourceKey="SaveButton_SystemDial" IsSave="true" PlacementType="Top Bottom" ColorType="Primary" IconCssClass="icon-floppy-disk" IsVisible="false" />
+		<Button xsi:type="FormButton" Ident="DeleteButton" TitleResourceKey="DeleteButton_SystemDial" IsSave="false" ColorType="Danger" PlacementType="Top Bottom" IsVisible="false" IconCssClass="icon-bin2">
+			<Extensions>
+				<Extension xsi:type="ConfirmDialogExtension" TitleResourceKey="DeleteDialogTitle_SystemDial" DescriptionResourceKey="DeleteDialogDescription_SystemDial" />
+			</Extensions>
+		</Button>
+		<Button xsi:type="BackButton" Ident="BackButton" TitleResourceKey="BackButton_SystemDial" IconCssClass="icon-undo2" />
+	</Buttons>
+	<Controls>
+
+		<Control xsi:type="HiddenControl" Ident="Ident" DataType="Number"/>
+
+		<Control xsi:type="TextBoxControl" Ident="TextValue" DataType="String" TitleResourceKey="TextValue_SystemDial" IsRequired="true" IsReadOnly="true"/>
+		<Control xsi:type="DropDownListControl" Ident="LanguageID" DataType="SmallNumber" TitleResourceKey="LanguageID_SystemDial" IsRequired="true" IsReadOnly="true">
+			<DataBind>
+				<Columns>
+					<Column Ident="ID" Title="ID" DataBindType="Value"/>
+					<Column Ident="Name" Title="Name" DataBindType="Title"/>
+				</Columns>
+				<SQL>
+					SELECT lan.ID, lan.[Name] 
+					FROM dbo.Language AS lan
+					WHERE 
+						lan.[State] = @LanguageActiveState
+						AND lan.[ID] != @UserLanguageID
+				</SQL>
+				<Parameters>
+					<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="LanguageActiveState" DataType="Number" Value="1"/>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UserLanguageID" DataType="Number" ConstantType="UserLanguageID" />
+				</Parameters>
+			</DataBind>
+		</Control>
+
+		<Control xsi:type="HiddenControl" Ident="TableID" DataType="Number"/>
+
+	</Controls>
+	<Sections>
+		<Section xsi:type="HeaderSection" Ident="HeaderSection">
+			<HTMLTemplate>
+				<div class="row">
+					<div class="col-md-12">
+						<h3>ID: [%ACTUALFORM.ID%] | [%ACTUALFORM.AccountID%] </h3>
+					</div>
+				</div>
+			</HTMLTemplate>
+		</Section>
+		<Section xsi:type="ContentSection" Ident="BasicInformationSection" TitleResourceKey="BasicInformationSection_SystemDial">
+			<HTMLTemplate>
+
+				<td>
+					<Control ID="TextValue" />
+				</td>
+				<td>
+					<Control ID="LanguageID" />
+				</td>
+				<td>
+					<a href="javascript:void(0);" class="js-inlineSubFormDelete" title="[#DeleteButton_SystemDial#]">
+						<i class="icon-bin"></i>
+					</a>
+				</td>
+			</HTMLTemplate>
+		</Section>
+	</Sections>
+</Form>

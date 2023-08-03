@@ -37,7 +37,7 @@
         <Parameters>
           <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ID" DataType="Number"/>
           <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" Value="0" DataType="Number"/>
-          <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="FormIdent" DataType="String" Value="__SubForm__"/>
+          <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="FormIdent" DataType="String" Value="__FORM__"/>
         </Parameters>
       </DataSource>
     </Control> -->

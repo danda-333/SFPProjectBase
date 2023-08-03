@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__DIAL__Setting" SegmentType="Admin" PackageIdent="__ModuleName__Package">
+	<Controls>
+
+		<Control xsi:type="HiddenControl" Ident="Ident" DataType="Number"/>
+
+		<Control xsi:type="HiddenControl" Ident="Setting" DataType="String" />
+
+	</Controls>
+</Form>

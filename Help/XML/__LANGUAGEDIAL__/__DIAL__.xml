@@ -34,6 +34,33 @@
 			</DataBind>
 		</Control>
 
+		<!-- <Control xsi:type="DropDownListControl" Ident="__DIAL__Ident" DataType="Number" TitleResourceKey="__DIAL__Ident___ModuleName__" IsReadOnly="true">
+			<DataBind DefaultTitleResourceKey="SelectValue___ModuleName__" DefaultValue="">
+				<Columns>
+					<Column Ident="Ident" DataBindType="Value" />
+					<Column Ident="TextValue" DataBindType="Title" />
+				</Columns>
+				<SQL>
+					SELECT DISTINCT dial.Ident, dial.TextValue
+					FROM usr.__DIAL__ AS dial
+					WHERE 
+						(
+							dial.Ident = @__DIAL__Ident
+							OR (
+								dial.[State] != @DeletedState
+								AND dial.IsActive = 1
+							)
+						) AND dial.LanguageID = @UserLanguageID
+					ORDER BY dial.TextValue ASC
+				</SQL>
+				<Parameters>
+					<dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0"/>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="__DIAL__Ident" DataType="String"/>
+					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UserLanguageID" ConstantType="UserLanguageID" DataType="Number"/>
+				</Parameters>
+			</DataBind>
+		</Control> -->
+
 		<Control xsi:type="CheckBoxControl" Ident="IsActive" DataType="Bool" TitleResourceKey="" LabelPlacementType="Right" Default="1"/>
 
 		<Control xsi:type="TextBoxControl" Ident="OrderValue" DataType="Number" TitleResourceKey="OrderValue_SystemDial" IsRequired="true" IsReadOnly="true"/>
@@ -90,6 +117,11 @@
 					.no-label > label {
 						display: none !important;
 					}
+
+					.custom-table td,
+					.custom-table th {
+						padding: .15rem .5rem !important;
+					}
 				</style>
 					
 				<div class="row">
@@ -100,38 +132,40 @@
 
 				<div class="row">
 					<div class="col-md-12">
-						<div class="table-responsive">
-							<table class="table table-hover table-striped table-togglable border-bottom-1 border-bottom-grey-300">
-								<thead>
-									<tr>
-										<th style="width: 40%">[#TextValue_SystemDial#]</th>
-										<th style="width: 20%">[#LanguageID_SystemDial#]</th>
-										<th style="width: 20%">[#OrderValue_SystemDial#]</th>
-										<th style="width: 10%">[#IsActive_SystemDial#]</th>
-										<th style="width: 10%"></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<Control ID="TextValue" />
-										</td>
-										<td>
-											<Control ID="LanguageID" />
-										</td>
-										<td>
-											<Control ID="OrderValue" />
-										</td>
-										<td class="no-label">
-											<Control ID="IsActive" />
-										</td>
-										<td>
-										</td>
+						<div class="form-group custom-table">
+							<div class="table-responsive">
+								<table class="table table-hover table-striped table-togglable border-bottom-1 border-bottom-grey-300">
+									<thead>
+										<tr>
+											<th style="width: 40%">[#TextValue_SystemDial#]</th>
+											<th style="width: 20%">[#LanguageID_SystemDial#]</th>
+											<th style="width: 20%">[#OrderValue_SystemDial#]</th>
+											<th style="width: 10%">[#IsActive_SystemDial#]</th>
+											<th style="width: 10%"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<Control ID="TextValue" />
+											</td>
+											<td>
+												<Control ID="LanguageID" />
+											</td>
+											<td>
+												<Control ID="OrderValue" />
+											</td>
+											<td class="no-label">
+												<Control ID="IsActive" />
+											</td>
+											<td>
+											</td>
 
-									</tr>
+										</tr>
 
-								</tbody>
-							</table>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -144,7 +178,7 @@
 				<div class="row">
 					<div class="col-md-12">
 
-						<div class="form-group">
+						<div class="form-group custom-table">
 							<Control ID="__DIAL__Fake" />
 						</div>
 					

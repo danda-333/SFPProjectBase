@@ -4,7 +4,7 @@
 
   <Button xsi:type="FormButton" Ident="RejectButton" TitleResourceKey="RejectButton___ModuleName__" IsSave="true" PlacementType="Top Bottom" IsVisible="false" ColorType="Danger" IconCssClass="icon-cross2"/> <!-- Zamítnout -->
 
-  <Button xsi:type="FormButton" Ident="SendToApprovalButton" TitleResourceKey="SendToApprovalButton___ModuleName__" IsSave="true" PlacementType="Top Bottom" IsVisible="false" ColorType="Success" IconCssClass="icon-forward"/> <!-- Odeslat ke schálení -->
+  <Button xsi:type="FormButton" Ident="SendToApprovalButton" TitleResourceKey="SendToApprovalButton___ModuleName__" IsSave="true" PlacementType="Top Bottom" IsVisible="false" ColorType="Success" IconCssClass="icon-forward"/> <!-- Odeslat ke schválení -->
 
   <Button xsi:type="FormButton" Ident="SaveButton" TitleResourceKey="SaveButton___ModuleName__" IsSave="true" PlacementType="Top Bottom" ColorType="Primary" IconCssClass="icon-floppy-disk" IsVisible="false" IsStopRedirect="true"/> <!-- Uložit -->
 

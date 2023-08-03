@@ -1,0 +1,26 @@
+<CheatSheet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+
+  <FormControl xsi:type="IFControl">
+    <Condition>
+      <SQL>
+        SELECT IIF(
+          __Podmínka__
+        , 1, 0)
+      </SQL>
+      <Parameters>
+        <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ID" DataType="Number" />
+      </Parameters>
+    </Condition>
+    <TrueControls>
+
+      <!-- <FormControl Ident="__ControlIdent__" IsVisible="true" /> -->
+
+    </TrueControls>
+    <FalseControls>
+
+      <!-- <FormControl Ident="__ControlIdent__" IsVisible="true" /> -->
+
+    </FalseControls>
+  </FormControl>
+
+</CheatSheet>

@@ -6,5 +6,6 @@
   xmlns:fi="http://www.gappex.com/sfp/Form/Indexes"
   xmlns:fcs="http://www.gappex.com/sfp/Form/Control/Settings"
   xmlns:dsf="http://www.gappex.com/sfp/DataSource/Froms"
+  xmlns:dws="http://www.gappex.com/sfp/DataView/Settings"
 >
 </CheatSheet>
