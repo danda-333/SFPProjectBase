@@ -1,1 +1,2 @@
-.xml NOT (__.xml OR -DoNotUpload.xml)
+".xml" NOT "-DoNotUpload.xml"
+filename:NOT *-DoNotUpload ext:xml
