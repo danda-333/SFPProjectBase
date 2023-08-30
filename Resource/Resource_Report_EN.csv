@@ -1,0 +1,8 @@
+"Ident";"Value";"Language";"Group";"System"
+"__Report__Title_Report___ModuleName__";"__Report__ REPORT WITHOUT TRANSLATION";"2";"__ModuleName__";"False"
+"__Report__DetailDescription_Report___ModuleName__";"You can display all data by clicking on “Display data” button. If you want to set filter, use “Set filter” button.ATTENTION - it can take some time to generate report if volume of data is large.";"2";"__ModuleName__";"False"
+"__Report__Description_Report___ModuleName__";"__Report__ DESCRIPTION WITHOUT TRANSLATION";"1";"__ModuleName__";"False"
+"__Report__SemiDescription_Report___ModuleName__";"";"2";"__ModuleName__";"False"
+"ID_Report___ModuleName__";"Key";"2";"__ModuleName__";"False"
+"RecordCount_Report___ModuleName__";"Record count";"2";"__ModuleName__";"False"
+"SelectValue_Report___ModuleName__";"Select value";"2";"__ModuleName__";"False"

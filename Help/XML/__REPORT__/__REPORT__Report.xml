@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" Ident="__Report__" SegmentType="Report" Priority="100" DefaultFilterIdent="__Report__Filter" TitleResourceKey="__Report__Title_Report___ModuleName__" DescriptionResourceKey="__Report__DetailDescription_Report___ModuleName__" ColorCssClass="white" PackageIdent="__ModuleName__Package">
+  <AccessPermissions>
+    <string>__ModuleName__</string>
+  </AccessPermissions>
+  <DataPermissions>
+    <string>__ModuleName__</string>
+  </DataPermissions>
+  <Sections>
+    <Section xsi:type="ItemSection">
+      <HTMLTemplate>
+        <div class="card card-body bg-success-400 has-bg-image">
+          <div class="media mb-3">
+            <div class="media-body">
+              <h6 class="font-weight-semibold mb-0">[#__Report__Title_Report___ModuleName__#]</h6>
+              <span class="opacity-75">[#__Report__Description_Report___ModuleName__#]</span>
+            </div>
+
+            <div class="ml-3 align-self-center">
+              <i class="icon-pulse2 icon-2x"></i>
+            </div>
+          </div>
+
+          <div class="progress bg-success-600 mb-2" style="height: 0.125rem;">
+            <div class="progress-bar bg-white" style="width: 80%">
+              <span class="sr-only">80% Complete</span>
+            </div>
+          </div>
+
+          <div>
+            <span class="float-right"></span>
+            [#__Report__SemiDescription_Report___ModuleName__#]
+          </div>
+        </div>
+      </HTMLTemplate>
+    </Section>
+    <Section xsi:type="ContentSection">
+      <DataSources>
+        <DataSource Ident="Aggregation">     
+          <DataPermissions>
+            <string>__ModuleName__</string>
+          </DataPermissions>     
+          <Columns>
+            <Column Ident="RecordCount" />
+          </Columns>
+          <SQL>
+            SELECT COUNT(__FormAlias__.ID) AS RecordCount
+            FROM usr.__Form__ AS __FormAlias__
+            WHERE
+              __FormAlias__.[State] != @DeletedState
+              AND #PERMISSION[__Form__(__FormAlias__)]# #FILTER#
+          </SQL>
+          <Parameters>
+            <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+          </Parameters>
+        </DataSource>
+        <DataSource Ident="Data">
+          <DataPermissions>
+            <string>__ModuleName__</string>
+          </DataPermissions>
+          <Columns>
+            <Column Ident="ID" />
+          </Columns>
+          <SQL>
+            SELECT 
+              __FormAlias__.ID
+            FROM usr.__Form__ AS __FormAlias__
+            WHERE
+              __FormAlias__.[State] != @DeletedState
+              AND #PERMISSION[__Form__(__FormAlias__)]# #FILTER#
+          </SQL>
+          <Parameters>
+            <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+          </Parameters>
+        </DataSource>
+      </DataSources>
+      <HTMLTemplate>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-body bg-indigo-400 has-bg-image">
+              <div class="media">
+                <div class="mr-3 align-self-center">
+                  <i class="icon-enter6 icon-3x opacity-75"></i>
+                </div>
+                [FOR Source="Aggregation"]
+                <div class="media-body text-right">
+                  <h3 class="mb-0">[%RecordCount%]</h3>
+                  <span class="text-uppercase font-size-xs">[#RecordCount_Report___ModuleName__#]</span>
+                </div>
+                [/FOR]
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr class="bg-blue">
+                <th>[#ID_Report___ModuleName__#]</th>
+              </tr>
+            </thead>
+            <tbody>
+              [FOR Source="Data"]
+              <tr>
+                <td>[%ID%]</td>
+              </tr>
+              [/FOR]
+            </tbody>
+          </table>
+        </div>
+      </HTMLTemplate>
+
+    </Section>
+  </Sections>
+  <Exports>
+    <DataSource Ident="Main" TitleResourceKey="Export">
+     <Columns>        
+        <Column Ident="ID" TitleResourceKey="ID_Report___ModuleName__" />
+      </Columns>
+      <SQL>
+        SELECT 
+              __FormAlias__.ID
+            FROM usr.__Form__ AS __FormAlias__
+            WHERE
+              __FormAlias__.[State] != @DeletedState
+              AND #PERMISSION[__Form__(__FormAlias__)]# #FILTER#
+      </SQL>
+      <Parameters>
+        <dsp:Parameter xsi:type="dsp:ValueParameter" Ident="DeletedState" DataType="Number" Value="0" />
+      </Parameters>
+    </DataSource>
+  </Exports>
+</Report>

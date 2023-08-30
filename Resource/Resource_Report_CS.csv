@@ -1,0 +1,8 @@
+"Ident";"Hodnota";"Jazky";"Skupina";"Systémový překlad"
+"__Report__Title_Report___ModuleName__";"__Report__ REPORT BEZ PŘEKLADU";"1";"__ModuleName__";"False"
+"__Report__DetailDescription_Report___ModuleName__";"Veškerá data zobrazíte kliknutím na tlačítko ""Zobraz data"". Pokud chcete použít filtr, je toto možné použitím tlačítka ""Nastav filtr"". POZOR, při větším objemu dat může generování reportu trvat déle.";"1";"__ModuleName__";"False"
+"__Report__Description_Report___ModuleName__";"__Report__ POPIS BEZ PŘEKLADU";"1";"__ModuleName__";"False"
+"__Report__SemiDescription_Report___ModuleName__";"";"1";"__ModuleName__";"False"
+"ID_Report___ModuleName__";"Klíč";"1";"__ModuleName__";"False"
+"RecordCount_Report___ModuleName__";"Počet záznamů";"1";"__ModuleName__";"False"
+"SelectValue_Report___ModuleName__";"Vyberte hodnotu";"1";"__ModuleName__";"False"

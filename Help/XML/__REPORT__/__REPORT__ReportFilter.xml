@@ -1,4 +1,4 @@
-<Filter xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Ident="__Form__Filter" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" PackageIdent="__ModuleName__Package">
+<Filter xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Ident="__Report__ReportFilter" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters" PackageIdent="__ModuleName__Package">
 	<Controls>
 
     <Control xsi:type="ListBoxControl" Ident="State" DataType="NumberList" TitleResourceKey="State___ModuleName__" >

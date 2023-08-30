@@ -1,0 +1,16 @@
+<CheatSheet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dsp="http://www.gappex.com/sfp/DataSource/Parameters">
+
+  <Sources>
+    <DataSource>
+      <Parameters>
+
+        <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="ID" DataType="Number" />
+        <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UserID" DataType="Number" ConstantType="UserID" />
+        <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UserLanguageID" DataType="Number" ConstantType="UserLanguageID" />
+        <dsp:Parameter xsi:type="dsp:VariableParameter" Ident="UICultureCode" DataType="String" ConstantType="UICultureCode" />
+
+      </Parameters>
+    </DataSource>
+  </Sources>
+
+</CheatSheet>
