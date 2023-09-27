@@ -13,8 +13,8 @@
 					FROM dbo.Account AS acc
 					INNER JOIN dbo.AccountPermissionStaticComputed AS aps ON acc.ID = aps.AccountID AND aps.PermissionID = '__ModuleName__' /* Omezení výberu pouze pro uřivatele s přístupem */
 					WHERE 
-						acc.[State] = @AccountActiveState
-						AND acc.FullName like @__ControlIdent__
+						acc.[State] = @AccountActiveState 
+						AND acc.FullName COLLATE SQL_Latin1_General_CP1253_CI_AI like @__ControlIdent__ COLLATE SQL_Latin1_General_CP1253_CI_AI
 				</SQL>
 				<Parameters>
 					<dsp:Parameter xsi:type="dsp:VariableParameter" Ident="__ControlIdent__" DataType="String" LikeType="Both" />
